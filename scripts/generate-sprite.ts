@@ -7,7 +7,7 @@ import { optimize } from "svgo"
 
 const ICONS_DIR = path.join(process.cwd(), "public/icons")
 const SPRITE_PATH = path.join(process.cwd(), "public/sprite.svg")
-const TYPES_PATH = path.join(process.cwd(), "src/types/icon-names.ts")
+const TYPES_PATH = path.join(process.cwd(), "src/shared/types/icon-names.ts")
 const PRETTIER_CONFIG_PATH = path.join(process.cwd(), ".prettierrc")
 
 const loadPrettierConfig = async () => {

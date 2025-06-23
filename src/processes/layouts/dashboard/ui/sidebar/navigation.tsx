@@ -1,0 +1,56 @@
+"use client"
+
+import { FC, useEffect, useState } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+import { NAVIGATION_LINK } from "@/src/processes/layouts/dashboard/models/constant"
+import { LucideIcon } from "@/src/shared/ui/icon/lucide"
+import { cn } from "@/src/shared/utils/cn"
+
+export const NavigationDashboard: FC = () => {
+  const router = usePathname()
+
+  const [messages, setMessages] = useState(0)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMessages(4)
+    }, 1000)
+  }, [])
+
+  return (
+    <nav className="w-full">
+      <p className="mb-2 text-lg text-gray-400">Main menu</p>
+      <ul>
+        {NAVIGATION_LINK.map((item, index) => {
+          return (
+            <li key={index}>
+              <Link
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-2 p-3",
+                  router === item.href && "rounded-3xl bg-purple-500 text-white"
+                )}
+              >
+                <LucideIcon name={item.icon} />
+                <span className="flex-auto">{item.label}</span>
+                {item?.notification && (
+                  <span
+                    className={cn(
+                      "rounded-3xl bg-purple-100 px-2 text-xs text-purple-500",
+                      router === item.href &&
+                        "rounded-3xl bg-white text-purple-400"
+                    )}
+                  >
+                    {messages}
+                  </span>
+                )}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+    </nav>
+  )
+}
