@@ -24,8 +24,9 @@ export const HeaderDashboard: FC = () => {
   return (
     <header className="mb-3 flex items-center justify-between">
       <h1 className="text-4xl font-bold">{title}</h1>
-      <div className="flex gap-3">
+      <div className="flex items-center gap-3">
         <Input
+          variant="filled"
           placeholder="Search something..."
           type="search"
           iconLeft={<LucideIcon name="Search" />}
