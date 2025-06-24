@@ -1,10 +1,10 @@
-import { FC } from "react"
+import { type FC } from "react"
 
 import {
   HeaderDashboard,
   SidebarDashboard,
 } from "@/src/processes/layouts/dashboard/ui"
-import { LayoutProps } from "@/src/shared/types/layout-type"
+import { type LayoutProps } from "@/src/shared/types/layout-type"
 
 export const DashboardLayout: FC<LayoutProps> = ({ children }) => {
   return (

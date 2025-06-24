@@ -1,9 +1,9 @@
-import { ForwardedRef, forwardRef, ReactNode } from "react"
+import { forwardRef, type ForwardedRef, type ReactNode } from "react"
 import {
-  FieldValues,
-  Path,
-  RegisterOptions,
-  UseFormRegister,
+  type FieldValues,
+  type Path,
+  type RegisterOptions,
+  type UseFormRegister,
 } from "react-hook-form"
 
 type InputSize = "sm" | "md" | "lg"
@@ -68,7 +68,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps<FieldValues>>(
     return (
       <div className={`flex flex-col gap-1 ${fullWidth ? "w-full" : "w-fit"}`}>
         <label
-          className={`relative flex items-center rounded-xl transition-all ${sizeClasses[size]} ${variantClasses[variant]} ${disabled ? "cursor-not-allowed opacity-60" : ""} ${error ? "border-red-500 focus:border-red-500 focus:ring-red-200" : ""} ${className} `}
+          className={`relative flex items-center rounded-xl text-black transition-all ${sizeClasses[size]} ${variantClasses[variant]} ${disabled ? "cursor-not-allowed opacity-60" : ""} ${error ? "border-red-500 focus:border-red-500 focus:ring-red-200" : ""} ${className} `}
         >
           {iconLeft && (
             <span className="mr-2 flex items-center">{iconLeft}</span>

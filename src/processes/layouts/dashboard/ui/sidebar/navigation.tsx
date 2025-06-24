@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, useEffect, useState } from "react"
+import { useEffect, useState, type FC } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -29,7 +29,7 @@ export const NavigationDashboard: FC = () => {
               <Link
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-2 p-3",
+                  "flex items-center gap-2 p-3 text-black",
                   router === item.href && "rounded-3xl bg-purple-500 text-white"
                 )}
               >

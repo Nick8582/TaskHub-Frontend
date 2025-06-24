@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from "react"
+import { useEffect, type RefObject } from "react"
 
 type ExcludedRefs = Array<RefObject<HTMLElement | null>>
 

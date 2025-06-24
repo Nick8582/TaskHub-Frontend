@@ -1,6 +1,6 @@
 import React from "react"
 
-import { IconName } from "@/src/shared/types/icon-names"
+import { type IconName } from "@/src/shared/types/icon-names"
 
 interface IconProps extends React.SVGAttributes<SVGElement> {
   name: IconName

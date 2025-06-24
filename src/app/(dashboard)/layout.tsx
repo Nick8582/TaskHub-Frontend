@@ -1,4 +1,4 @@
-import { Metadata } from "next"
+import { type Metadata } from "next"
 
 import { DashboardLayout } from "@/src/processes/layouts"
 import { NO_INDEX_PAGE } from "@/src/shared/constants/seo.constants"

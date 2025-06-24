@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, useEffect, useState } from "react"
+import { useEffect, useState, type FC } from "react"
 import { usePathname } from "next/navigation"
 
 import { NAVIGATION_LINK } from "@/src/processes/layouts/dashboard/models/constant"
@@ -23,7 +23,7 @@ export const HeaderDashboard: FC = () => {
 
   return (
     <header className="mb-3 flex items-center justify-between">
-      <h1 className="text-4xl font-bold">{title}</h1>
+      <h1 className="text-4xl font-bold text-black">{title}</h1>
       <div className="flex items-center gap-3">
         <Input
           variant="filled"
