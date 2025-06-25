@@ -2,10 +2,19 @@ import type { FC, ReactNode } from "react"
 
 import { cn } from "@/src/shared/utils/cn"
 
+export type UICardColor = "yellow" | "rose" | "purple" | "dashboard"
+
 interface CardProps {
   children: ReactNode
-  color?: "yellow" | "rose" | "purple"
+  color?: UICardColor
   className?: string
+}
+
+const colors = {
+  purple: "bg-hard-purple",
+  yellow: "bg-hard-yellow",
+  rose: "bg-hard-rose",
+  dashboard: "bg-gray-dashboard",
 }
 
 export const Card: FC<CardProps> = ({
@@ -13,12 +22,6 @@ export const Card: FC<CardProps> = ({
   color = "purple",
   className,
 }) => {
-  const colors = {
-    purple: "bg-hard-purple",
-    yellow: "bg-hard-yellow",
-    rose: "bg-hard-rose",
-  }
-
   return (
     <div
       className={cn(colors[color], "text-hard-dark rounded-2xl p-3", className)}

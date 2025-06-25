@@ -4,11 +4,13 @@ import ImageActive from "@/public/image/active-projects.svg"
 import ImageOngoing from "@/public/image/ongoing-projects.svg"
 import ImageWorking from "@/public/image/working-hours.svg"
 
+import type { UICardColor } from "@/src/shared/ui/card"
+
 export const DATA_CARDS_DASHBOARD: {
   number: string
   label: string
   img: StaticImageData
-  color: "purple" | "yellow" | "rose"
+  color: UICardColor
 }[] = [
   {
     number: "92",

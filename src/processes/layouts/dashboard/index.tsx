@@ -12,9 +12,16 @@ export const DashboardLayout: FC<LayoutProps> = ({ children }) => {
       <SidebarDashboard />
       <div className="bg-gray-sidebar flex-auto p-4">
         <HeaderDashboard />
-        <main className="grid grid-cols-3">{children}</main>
+        <main className="grid grid-cols-3 gap-3">{children}</main>
       </div>
-      <div className="w-3xs">Chat</div>
+      <div className="flex w-1/5 flex-col">
+        <div className="h-1/2 bg-[url(/image/right-bg.png)] bg-cover bg-center bg-no-repeat"></div>
+        <div className="bg-primary text-hard-white flex h-1/2 flex-col">
+          <div className="bg-primary-light p-4">Header</div>
+          <div className="bg-primary-dark flex-auto p-4">Main</div>
+          <div className="bg-primary-light p-4">Footer</div>
+        </div>
+      </div>
     </div>
   )
 }

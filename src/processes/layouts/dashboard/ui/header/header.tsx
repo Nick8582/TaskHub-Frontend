@@ -4,6 +4,7 @@ import { useEffect, useState, type FC } from "react"
 import { usePathname } from "next/navigation"
 
 import { NAVIGATION_LINK } from "@/src/processes/layouts/dashboard/models/constant"
+import { ThemeButton } from "@/src/processes/layouts/dashboard/ui/header/theme-button"
 import { Button } from "@/src/shared/ui/button"
 import { LucideIcon } from "@/src/shared/ui/icon/lucide"
 import { Input } from "@/src/shared/ui/input"
@@ -35,6 +36,7 @@ export const HeaderDashboard: FC = () => {
         <Button square className="p-4">
           <LucideIcon name="Bell" size={30} />
         </Button>
+        <ThemeButton />
       </div>
     </header>
   )

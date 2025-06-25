@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import Image from "next/image"
 
-import { DATA_CARDS_DASHBOARD } from "@/src/feature/dashboard/data"
+import { DATA_CARDS_DASHBOARD } from "@/src/feature/active-cards/data"
 import { Card } from "@/src/shared/ui/card"
 
 export const ActiveCards: FC = () => {
