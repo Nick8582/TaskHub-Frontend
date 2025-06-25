@@ -16,7 +16,7 @@ export const Button: FC<ButtonProps> = ({
   return (
     <button
       className={cn(
-        "rounded-2xl border-none bg-white p-1 text-black",
+        "bg-gray-dashboard text-gray-text rounded-2xl border-none p-1",
         square && "aspect-square",
         className
       )}

@@ -6,7 +6,7 @@ import { ProjectsDashboard } from "@/src/processes/layouts/dashboard/ui/sidebar/
 
 export const SidebarDashboard: FC = () => {
   return (
-    <aside className="max-w-62 my-auto flex h-full w-full bg-white">
+    <aside className="max-w-62 bg-gray-dashboard my-auto flex h-full w-full">
       <div className="ml-auto flex h-full w-full flex-auto flex-col items-center justify-center gap-4 p-4">
         <AccountDashboard />
         <NavigationDashboard />

@@ -21,7 +21,7 @@ export const NavigationDashboard: FC = () => {
 
   return (
     <nav className="w-full">
-      <p className="mb-2 text-lg text-gray-400">Main menu</p>
+      <p className="text-gray-text mb-2 text-lg">Main menu</p>
       <ul>
         {NAVIGATION_LINK.map((item, index) => {
           return (
@@ -29,8 +29,8 @@ export const NavigationDashboard: FC = () => {
               <Link
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-2 p-3 text-black",
-                  router === item.href && "rounded-3xl bg-purple-500 text-white"
+                  "text-gray-text flex items-center gap-2 p-3",
+                  router === item.href && "bg-primary rounded-3xl text-white"
                 )}
               >
                 <LucideIcon name={item.icon} />
@@ -38,9 +38,9 @@ export const NavigationDashboard: FC = () => {
                 {item?.notification && (
                   <span
                     className={cn(
-                      "rounded-3xl bg-purple-100 px-2 text-xs text-purple-500",
+                      "bg-primary-light text-gray-dashboard rounded-3xl px-2 text-xs",
                       router === item.href &&
-                        "rounded-3xl bg-white text-purple-400"
+                        "bg-gray-dashboard text-primary-light rounded-3xl"
                     )}
                   >
                     {messages}

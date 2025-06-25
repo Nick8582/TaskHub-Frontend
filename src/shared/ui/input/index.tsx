@@ -7,7 +7,7 @@ import {
 } from "react-hook-form"
 
 type InputSize = "sm" | "md" | "lg"
-type InputVariant = "outline" | "filled" | "flushed"
+type InputVariant = "filled"
 
 type OmittedInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -35,12 +35,7 @@ const sizeClasses: Record<InputSize, string> = {
 }
 
 const variantClasses: Record<InputVariant, string> = {
-  outline:
-    "border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200",
-  filled:
-    "bg-white border border-transparent focus:bg-white focus:border-blue-500",
-  flushed:
-    "border-b-2 border-gray-300 bg-transparent px-0 focus:border-blue-500 rounded-none",
+  filled: "bg-gray-dashboard border border-transparent",
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps<FieldValues>>(
@@ -48,7 +43,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps<FieldValues>>(
     {
       iconLeft,
       size = "md",
-      variant = "outline",
+      variant = "filled",
       register,
       name,
       validation,
@@ -68,21 +63,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps<FieldValues>>(
     return (
       <div className={`flex flex-col gap-1 ${fullWidth ? "w-full" : "w-fit"}`}>
         <label
-          className={`relative flex items-center rounded-xl text-black transition-all ${sizeClasses[size]} ${variantClasses[variant]} ${disabled ? "cursor-not-allowed opacity-60" : ""} ${error ? "border-red-500 focus:border-red-500 focus:ring-red-200" : ""} ${className} `}
+          className={`text-gray-text relative flex items-center rounded-xl transition-all ${sizeClasses[size]} ${variantClasses[variant]} ${disabled ? "cursor-not-allowed opacity-60" : ""} ${error ? "border-status-overdue focus:border-status-overdue focus:ring-status-inprogress" : ""} ${className} `}
         >
           {iconLeft && (
-            <span className="mr-2 flex items-center">{iconLeft}</span>
+            <span className="text-gray-text mr-2 flex items-center">
+              {iconLeft}
+            </span>
           )}
           <input
             {...registration}
             {...props}
             ref={inputRef || ref}
             disabled={disabled}
-            className={`w-full bg-transparent outline-none placeholder:text-gray-400 disabled:cursor-not-allowed ${inputClassName} `}
+            className={`placeholder:text-gray-text text-gray-text w-full bg-transparent outline-none disabled:cursor-not-allowed ${inputClassName} `}
           />
         </label>
 
-        {error && <span className="pl-2 text-sm text-red-500">{error}</span>}
+        {error && (
+          <span className="text-status-overdue pl-2 text-sm">{error}</span>
+        )}
       </div>
     )
   }
