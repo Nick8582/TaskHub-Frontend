@@ -14,13 +14,15 @@ export const Card: FC<CardProps> = ({
   className,
 }) => {
   const colors = {
-    purple: "bg-gray-border",
-    yellow: "bg-status-inprogress",
-    rose: "bg-status-complete",
+    purple: "bg-hard-purple",
+    yellow: "bg-hard-yellow",
+    rose: "bg-hard-rose",
   }
 
   return (
-    <div className={cn(colors[color], "rounded-2xl p-3", className)}>
+    <div
+      className={cn(colors[color], "text-hard-dark rounded-2xl p-3", className)}
+    >
       {children}
     </div>
   )
