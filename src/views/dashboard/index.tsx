@@ -7,7 +7,7 @@ export const DashboardPage: FC = () => {
   return (
     <>
       <ActiveCards />
-      <Chart className="col-span-2" />
+      <Chart className="col-span-2 flex h-full flex-col" />
     </>
   )
 }
