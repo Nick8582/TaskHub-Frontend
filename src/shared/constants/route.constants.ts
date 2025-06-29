@@ -10,3 +10,9 @@ export const RouteDashboard = {
 
 export type RouteDashboard =
   (typeof RouteDashboard)[keyof typeof RouteDashboard]
+
+export const RouteHome = {
+  HOME: "/",
+} as const
+
+export type RouteHome = (typeof RouteHome)[keyof typeof RouteHome]

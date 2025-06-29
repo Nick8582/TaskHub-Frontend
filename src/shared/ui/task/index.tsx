@@ -66,10 +66,10 @@ export const Task: FC<TaskProps> = ({ task }) => {
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <button className="bg-primary text-hard-white flex h-10 w-10 cursor-pointer items-center justify-center rounded-full">
+          <button className="bg-primary text-hard-white border-primary hover:bg-hard-white hover:text-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-all">
             <Plus />
           </button>
-          <button className="bg-hard-white text-primary border-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border">
+          <button className="bg-hard-white text-primary hover:bg-primary hover:text-hard-white border-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-all">
             <Pencil />
           </button>
         </div>

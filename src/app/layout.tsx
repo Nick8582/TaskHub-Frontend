@@ -12,6 +12,16 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: "",
+  manifest: "manifest.json",
+  themeColor: "#ffffff",
+  appleWebApp: {
+    capable: true,
+    title: SITE_NAME,
+    statusBarStyle: "default",
+  },
+  formatDetection: {
+    telephone: false,
+  },
 }
 
 export default function RootLayout({
@@ -21,6 +31,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="manifest" href="manifest.json" />
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="mobile-web-app-capable" content="yes" />
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>
