@@ -11,10 +11,10 @@ interface CardProps {
 }
 
 const colors = {
-  purple: "bg-hard-purple",
-  yellow: "bg-hard-yellow",
-  rose: "bg-hard-rose",
-  dashboard: "bg-gray-dashboard",
+  purple: "bg-hard-purple text-hard-dark",
+  yellow: "bg-hard-yellow text-hard-dark",
+  rose: "bg-hard-rose text-hard-dark",
+  dashboard: "bg-gray-dashboard text-gray-text",
 }
 
 export const Card: FC<CardProps> = ({
@@ -23,9 +23,7 @@ export const Card: FC<CardProps> = ({
   className,
 }) => {
   return (
-    <div
-      className={cn(colors[color], "text-hard-dark rounded-2xl p-3", className)}
-    >
+    <div className={cn(colors[color], "rounded-2xl p-3", className)}>
       {children}
     </div>
   )

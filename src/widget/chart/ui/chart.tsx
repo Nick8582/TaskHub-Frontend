@@ -11,8 +11,8 @@ import {
   YAxis,
 } from "recharts"
 
-import { ChartTooltip } from "@/src/feature/chart/ui/chart-tooltip"
-import type { ChartDataPoint } from "@/src/shared/types/dashboard/project-charts-type"
+import type { ChartDataPoint } from "@/src/shared/types/dashboard/project-charts.type"
+import { ChartTooltip } from "@/src/widget/chart/ui/chart-tooltip"
 
 interface ProjectChartProps {
   data: ChartDataPoint[]

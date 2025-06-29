@@ -2,9 +2,9 @@ import { useState, type FC } from "react"
 
 import { ChevronDown } from "lucide-react"
 
-import { timeRanges } from "@/src/feature/chart/mock-data"
-import type { TimeRange } from "@/src/shared/types/dashboard/project-charts-type"
+import type { TimeRange } from "@/src/shared/types/dashboard/project-charts.type"
 import { cn } from "@/src/shared/utils/cn"
+import { timeRanges } from "@/src/widget/chart/mock-data"
 
 interface ChartHeaderProps {
   selectRange: TimeRange

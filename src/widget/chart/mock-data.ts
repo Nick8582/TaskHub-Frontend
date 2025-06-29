@@ -1,7 +1,7 @@
 import type {
   ChartDataPoint,
   TimeRange,
-} from "@/src/shared/types/dashboard/project-charts-type"
+} from "@/src/shared/types/dashboard/project-charts.type"
 
 export const yearlyData: ChartDataPoint[] = [
   { period: "Jan", value: 15 },
