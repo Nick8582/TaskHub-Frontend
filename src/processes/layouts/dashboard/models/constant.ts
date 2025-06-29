@@ -1,5 +1,5 @@
 import { RouteDashboard } from "@/src/shared/constants/route.constants"
-import { type DashboardNavigationType } from "@/src/shared/types/dashboard-navigation-type"
+import { type DashboardNavigationType } from "@/src/shared/types/dashboard/navigation-type"
 
 export const NAVIGATION_LINK: DashboardNavigationType[] = [
   {

@@ -7,7 +7,7 @@ export const DashboardPage: FC = () => {
   return (
     <>
       <ActiveCards />
-      <Chart className="col-span-2 flex h-full flex-col" />
+      <Chart className="col-span-2 flex h-full flex-col justify-between gap-2" />
     </>
   )
 }
