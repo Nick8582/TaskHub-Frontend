@@ -1,3 +1,5 @@
+import { HomePage } from "@/src/views/home"
+
 export default function RootHome() {
-  return <div>Home</div>
+  return <HomePage />
 }

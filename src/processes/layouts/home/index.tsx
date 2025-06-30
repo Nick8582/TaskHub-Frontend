@@ -7,7 +7,9 @@ export const HomeLayout: FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex min-h-dvh w-full flex-col">
       <HeaderHome />
-      <main className="bg-gray-dashboard">{children}</main>
+      <main className="bg-linear-95 from-gray-dashboard to-gray-sidebar flex flex-auto flex-col">
+        {children}
+      </main>
     </div>
   )
 }

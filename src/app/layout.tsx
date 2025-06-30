@@ -5,13 +5,15 @@ import "../processes/styles/globals.css"
 import { Providers } from "@/src/app/providers"
 import { SITE_NAME } from "@/src/shared/constants/seo.constants"
 
-// TODO: сделать SEO
 export const metadata: Metadata = {
   title: {
     default: SITE_NAME,
     template: `%s | ${SITE_NAME}`,
   },
-  description: "",
+  description:
+    "Track projects, tasks, and team performance with our intuitive dashboard. Manage workflows efficiently.",
+  keywords:
+    "dashboard, project management, tasks, team collaboration, productivity",
   manifest: "manifest.json",
   appleWebApp: {
     capable: true,
