@@ -10,9 +10,11 @@ export const DashboardLayout: FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex h-dvh w-full overflow-hidden">
       <SidebarDashboard />
-      <div className="bg-gray-sidebar flex-auto p-4">
+      <div className="bg-gray-sidebar flex flex-auto flex-col overflow-hidden p-4">
         <HeaderDashboard />
-        <main className="grid grid-cols-3 gap-3">{children}</main>
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <main className="grid grid-cols-3 gap-3">{children}</main>
+        </div>
       </div>
       <div className="flex w-1/5 flex-col">
         <div className="h-1/2 bg-[url(/image/right-bg.png)] bg-cover bg-center bg-no-repeat"></div>
