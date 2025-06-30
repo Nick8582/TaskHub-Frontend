@@ -5,6 +5,7 @@ import { Folder, Link, MessageCircleMore, Pencil, Plus } from "lucide-react"
 
 import type { ITask } from "@/src/shared/types/task.types"
 import { Card } from "@/src/shared/ui/card"
+import { ProgressBar } from "@/src/shared/ui/progress"
 
 interface TaskProps {
   task: ITask
@@ -17,8 +18,8 @@ export const Task: FC<TaskProps> = ({ task }) => {
 
   return (
     <Card color="dashboard">
-      <div className="mb-4 flex items-center justify-between gap-1.5">
-        <div className="bg-primary-light/10 text-primary flex h-10 w-10 items-center justify-center rounded-full p-1">
+      <div className="mb-1 flex items-center justify-between gap-1.5">
+        <div className="bg-primary-light/10 text-primary mr-2 flex h-10 w-10 items-center justify-center rounded-full p-1">
           <task.icon />
         </div>
         <span className="text-lg/tight font-bold">{task.title}</span>
@@ -36,20 +37,13 @@ export const Task: FC<TaskProps> = ({ task }) => {
           ))}
         </div>
       </div>
-      <div className="mb-3">
+      <div className="text-gray-text mb-3 opacity-45">
         <span>
           Due: {Math.ceil((+task.dueDate - Date.now()) / (1000 * 60 * 60 * 24))}{" "}
           days
         </span>
       </div>
-      <div className="bg-gray-sidebar relative mb-3 w-full rounded-3xl py-8">
-        <span
-          className="bg-primary text-hard-white absolute bottom-0 left-0 top-0 flex items-center justify-center rounded-3xl"
-          style={{ width: progress + "%" }}
-        >
-          {progress}%
-        </span>
-      </div>
+      <ProgressBar progress={progress} />
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1">

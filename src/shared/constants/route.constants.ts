@@ -13,6 +13,8 @@ export type RouteDashboard =
 
 export const RouteHome = {
   HOME: "/",
+  LOGIN: "/login",
+  REGISTER: "/register",
 } as const
 
 export type RouteHome = (typeof RouteHome)[keyof typeof RouteHome]

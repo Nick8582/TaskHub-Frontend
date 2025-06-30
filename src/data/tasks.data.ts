@@ -45,7 +45,7 @@ export const MockTasks: ITask[] = [
       { id: "3-1", title: "Prepare contract", isCompleted: true },
       { id: "3-2", title: "Confirm meeting time", isCompleted: true },
       { id: "3-3", title: "Prepare demo materials", isCompleted: true },
-      { id: "3-4", title: "Share agenda with client", isCompleted: false },
+      { id: "3-4", title: "Share agenda with client", isCompleted: true },
       { id: "3-5", title: "Book meeting room", isCompleted: false },
     ],
     comments: ["Client agreed to terms", "Reschedule signing for next week"],

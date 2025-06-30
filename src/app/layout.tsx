@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   },
   description: "",
   manifest: "manifest.json",
-  themeColor: "#ffffff",
   appleWebApp: {
     capable: true,
     title: SITE_NAME,

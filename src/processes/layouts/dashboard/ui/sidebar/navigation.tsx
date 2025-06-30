@@ -22,15 +22,16 @@ export const NavigationDashboard: FC = () => {
   return (
     <nav className="w-full">
       <p className="text-gray-text mb-2 text-lg">Main menu</p>
-      <ul>
+      <ul className="flex flex-col gap-1">
         {NAVIGATION_LINK.map((item, index) => {
           return (
             <li key={index}>
               <Link
                 href={item.href}
                 className={cn(
-                  "text-gray-text flex items-center gap-2 p-3",
-                  router === item.href && "bg-primary rounded-3xl text-white"
+                  "text-gray-text hover:bg-primary-light/20 flex items-center gap-2 rounded-3xl p-3 transition-all",
+                  router === item.href &&
+                    "bg-primary hover:bg-primary-dark rounded-3xl text-white"
                 )}
               >
                 <LucideIcon name={item.icon} />
