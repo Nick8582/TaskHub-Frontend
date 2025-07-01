@@ -26,9 +26,9 @@ export const ProgressBar: FC<ProgressBarProps> = ({ progress }) => {
   }
 
   return (
-    <div className="mb-3 h-10 w-full overflow-hidden rounded-full bg-gray-200">
+    <div className="bg-primary/20 relative mb-3 h-10 w-full overflow-hidden rounded-full">
       <div
-        className={`${getColorClass()} duration-3000 flex h-full items-center justify-center bg-[repeating-linear-gradient(45deg,rgba(255,255,255,0.1)_0,rgba(255,255,255,0.1)_10px,transparent_10px,transparent_20px)] text-sm font-semibold text-white transition-all ease-out`}
+        className={`${getColorClass()} duration-3000 flex h-full items-center justify-center rounded-3xl bg-[repeating-linear-gradient(45deg,rgba(255,255,255,0.1)_0,rgba(255,255,255,0.1)_10px,transparent_10px,transparent_20px)] text-sm font-semibold text-white transition-all ease-out`}
         style={{ width: `${animatedProgress}%` }}
       >
         {progress === 100 ? (
@@ -37,9 +37,14 @@ export const ProgressBar: FC<ProgressBarProps> = ({ progress }) => {
             Done
           </span>
         ) : (
-          `${progress}%`
+          progress !== 0 && `${progress}%`
         )}
       </div>
+      {progress === 0 && (
+        <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center text-sm font-semibold">
+          Incomplete task
+        </div>
+      )}
     </div>
   )
 }

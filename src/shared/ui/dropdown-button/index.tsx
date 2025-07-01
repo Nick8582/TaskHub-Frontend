@@ -44,7 +44,7 @@ export const DropdownButton = <T,>({
       <button
         ref={buttonRef}
         className={cn(
-          "border-gray-border flex cursor-pointer items-center justify-between gap-2 rounded-2xl border px-3 py-1",
+          "border-gray-border bg-gray-dashboard flex cursor-pointer items-center justify-between gap-2 rounded-2xl border px-3 py-1",
           buttonClassName
         )}
         onClick={() => setIsOpen(!isOpen)}

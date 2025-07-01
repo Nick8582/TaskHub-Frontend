@@ -17,12 +17,12 @@ export const Task: FC<TaskProps> = ({ task }) => {
   const progress = Math.round((completedCount / totalCount) * 100)
 
   return (
-    <Card color="dashboard" className="flex flex-col justify-between">
-      <div className="mb-1 flex items-start justify-between gap-1.5">
+    <Card color="dashboard" className="flex h-full flex-col justify-between">
+      <div className="mb-1 flex flex-auto items-start justify-between gap-1.5">
         <div className="bg-primary-light/10 text-primary mr-2 flex h-10 w-10 items-center justify-center rounded-full p-1">
           <task.icon />
         </div>
-        <div>
+        <div className="flex h-full flex-col justify-between">
           <span className="text-lg/tight font-bold">{task.title}</span>
           <div className="text-gray-text mb-3 opacity-45">
             <span>
@@ -32,7 +32,7 @@ export const Task: FC<TaskProps> = ({ task }) => {
             </span>
           </div>
         </div>
-        <div className="flex min-w-20 items-center -space-x-2">
+        <div className="flex min-w-20 items-center justify-end -space-x-2">
           {task.users.map(user => (
             <div key={user.id} className="bg-hard-white rounded-full p-0.5">
               <Image
