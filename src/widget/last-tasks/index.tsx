@@ -1,9 +1,8 @@
 "use client"
 
-import { useEffect, useRef, useState, type FC } from "react"
+import { useRef, useState, type FC } from "react"
 
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import type { Swiper as SwiperType } from "swiper"
 
 import { Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -28,15 +27,9 @@ export const LastTasks: FC<LastTasksProps> = ({ className }) => {
   const [selectedValue, setSelectedValue] =
     useState<LastTaskFilter["value"]>("all")
   const filteredTasks = filterTasks(MockTasks, selectedValue)
-  const swiperRef = useRef<SwiperType | null>(null)
+
   const navigationPrevRef = useRef<HTMLButtonElement>(null)
   const navigationNextRef = useRef<HTMLButtonElement>(null)
-
-  useEffect(() => {
-    if (swiperRef.current) {
-      swiperRef.current.navigation.update()
-    }
-  }, [filteredTasks])
 
   return (
     <div className={cn(className, "flex flex-col gap-3")}>
@@ -93,14 +86,6 @@ export const LastTasks: FC<LastTasksProps> = ({ className }) => {
             navigation={{
               prevEl: navigationPrevRef.current,
               nextEl: navigationNextRef.current,
-              disabledClass: "opacity-50 cursor-default",
-            }}
-            onSwiper={swiper => {
-              swiperRef.current = swiper
-            }}
-            onAfterInit={swiper => {
-              swiper.navigation.init()
-              swiper.navigation.update()
             }}
             breakpoints={{
               0: { slidesPerView: 1 },
