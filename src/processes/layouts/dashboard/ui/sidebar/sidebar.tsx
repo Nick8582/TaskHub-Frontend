@@ -6,8 +6,8 @@ import { ProjectsDashboard } from "@/src/processes/layouts/dashboard/ui/sidebar/
 
 export const SidebarDashboard: FC = () => {
   return (
-    <aside className="max-w-62 bg-gray-dashboard my-auto flex h-full w-full">
-      <div className="ml-auto flex h-full w-full flex-auto flex-col items-center justify-center gap-4 p-4">
+    <aside className="max-w-62 bg-gray-dashboard h-full w-full overflow-hidden">
+      <div className="flex h-full flex-col gap-4 overflow-y-auto p-4">
         <AccountDashboard />
         <NavigationDashboard />
         <ProjectsDashboard />
