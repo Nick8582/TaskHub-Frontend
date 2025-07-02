@@ -1,4 +1,4 @@
-import type { FC, RefObject } from "react"
+import { type FC, type RefObject } from "react"
 
 import { Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -16,19 +16,19 @@ import { TaskSkeleton } from "@/src/shared/ui/task/skeleton"
 interface LastTaskCardsProps {
   isLoading: boolean
   filteredTasks: ITask[]
+  swiperKey: number
+  swiperRef: RefObject<SwiperType | null>
   navigationPrevRef: RefObject<HTMLButtonElement | null>
   navigationNextRef: RefObject<HTMLButtonElement | null>
-  swiperRef: RefObject<SwiperType | null>
-  swiperKey: number
 }
 
 export const LastTaskCards: FC<LastTaskCardsProps> = ({
   isLoading,
   filteredTasks,
+  swiperKey,
+  swiperRef,
   navigationPrevRef,
   navigationNextRef,
-  swiperRef,
-  swiperKey,
 }) => {
   return (
     <div className="relative">

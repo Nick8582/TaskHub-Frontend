@@ -1,4 +1,4 @@
-import type { Dispatch, FC, RefObject, SetStateAction } from "react"
+import { type FC, type RefObject } from "react"
 
 import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react"
 
@@ -11,28 +11,34 @@ import { cn } from "@/src/shared/utils/cn"
 interface LastTaskHeaderProps {
   isLoading?: boolean
   filteredTasks: ITask[]
-  navigationPrevRef: RefObject<HTMLButtonElement | null>
-  navigationNextRef: RefObject<HTMLButtonElement | null>
   sortOrder: "asc" | "desc"
-  setSortOrder: (value: SetStateAction<"asc" | "desc">) => void
+  setSortOrder: (value: "asc" | "desc") => void
   selectedValue: LastTaskFilter["value"]
   filterOptions: LastTaskFilter[]
-  setSelectedValue: Dispatch<
-    SetStateAction<"all" | "completed" | "incomplete" | "partial">
-  >
+  setSelectedValue: (value: LastTaskFilter["value"]) => void
+  navigationPrevRef: RefObject<HTMLButtonElement | null>
+  navigationNextRef: RefObject<HTMLButtonElement | null>
 }
 
 export const LastTaskHeader: FC<LastTaskHeaderProps> = ({
   filteredTasks,
   isLoading,
-  navigationPrevRef,
-  navigationNextRef,
   sortOrder,
   setSortOrder,
   selectedValue,
   filterOptions,
   setSelectedValue,
+  navigationPrevRef,
+  navigationNextRef,
 }) => {
+  const handleDedLine = () => {
+    if (sortOrder === "asc") {
+      setSortOrder("desc")
+    } else {
+      setSortOrder("asc")
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-between">
       <h2 className="text-gray-text text-2xl font-bold">
@@ -60,9 +66,7 @@ export const LastTaskHeader: FC<LastTaskHeaderProps> = ({
           </div>
         )}
         <Button
-          onClick={() =>
-            setSortOrder(prev => (prev === "asc" ? "desc" : "asc"))
-          }
+          onClick={handleDedLine}
           className="flex items-center gap-2 px-2 py-1"
         >
           {sortOrder === "asc" ? <ChevronDown /> : <ChevronUp />}
