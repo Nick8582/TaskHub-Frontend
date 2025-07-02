@@ -65,7 +65,7 @@ export const LastTasks: FC<LastTasksProps> = ({ className }) => {
 
         <div className="flex items-center gap-4">
           {filteredTasks.length > 3 && (
-            <div className="flex gap-2">
+            <div className={cn("flex gap-2", isLoading && "hidden")}>
               <button
                 ref={navigationPrevRef}
                 className="bg-gray-dashboard hover:bg-gray-dashboard/80 cursor-pointer rounded-full p-1 shadow-md transition-colors disabled:cursor-default disabled:opacity-50"
@@ -106,25 +106,11 @@ export const LastTasks: FC<LastTasksProps> = ({ className }) => {
 
       <div className="relative">
         {isLoading ? (
-          <Swiper
-            key="skeleton-swiper"
-            modules={[Navigation]}
-            spaceBetween={12}
-            slidesPerView={3}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              640: { slidesPerView: 2 },
-              768: { slidesPerView: 2.5 },
-              1024: { slidesPerView: 3 },
-            }}
-            style={{ padding: "4px 0" }}
-          >
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {[...Array(3)].map((_, index) => (
-              <SwiperSlide key={`skeleton-${index}`} style={{ height: "auto" }}>
-                <TaskSkeleton />
-              </SwiperSlide>
+              <TaskSkeleton key={`skeleton-${index}`} />
             ))}
-          </Swiper>
+          </div>
         ) : filteredTasks.length === 0 ? (
           <Card color="dashboard" className="col-span-3 py-6">
             <p className="text-gray-text text-center text-lg font-bold">
