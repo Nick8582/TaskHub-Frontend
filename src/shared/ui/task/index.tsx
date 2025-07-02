@@ -22,7 +22,7 @@ export const Task: FC<TaskProps> = ({ task }) => {
         <div className="bg-primary-light/10 text-primary mr-2 flex h-10 w-10 items-center justify-center rounded-full p-1">
           <task.icon />
         </div>
-        <div className="flex h-full flex-col justify-between">
+        <div className="flex h-full flex-auto flex-col justify-between">
           <span className="text-lg/tight font-bold">{task.title}</span>
           <div className="text-gray-text mb-3 opacity-45">
             <span>

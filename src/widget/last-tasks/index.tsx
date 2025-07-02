@@ -1,8 +1,8 @@
 "use client"
 
-import { useRef, useState, type FC } from "react"
+import { useEffect, useRef, useState, type FC } from "react"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react"
 
 import { Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -10,11 +10,15 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/navigation"
 
+import type { Swiper as SwiperType } from "swiper"
+
 import { MockTasks } from "@/src/data/tasks.data"
 import type { LastTaskFilter } from "@/src/shared/types/dashboard/filter-last-task.type"
+import { Button } from "@/src/shared/ui/button"
 import { Card } from "@/src/shared/ui/card"
 import { DropdownButton } from "@/src/shared/ui/dropdown-button"
 import { Task } from "@/src/shared/ui/task"
+import { TaskSkeleton } from "@/src/shared/ui/task/skeleton"
 import { cn } from "@/src/shared/utils/cn"
 import { filterTasks } from "@/src/widget/last-tasks/model/filter-task"
 import { filterLastTaskData } from "@/src/widget/last-tasks/model/filter.data"
@@ -26,10 +30,30 @@ interface LastTasksProps {
 export const LastTasks: FC<LastTasksProps> = ({ className }) => {
   const [selectedValue, setSelectedValue] =
     useState<LastTaskFilter["value"]>("all")
-  const filteredTasks = filterTasks(MockTasks, selectedValue)
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc")
+  const [isLoading, setIsLoading] = useState(true)
+  const filteredTasks = filterTasks(MockTasks, selectedValue, sortOrder)
+  const [swiperKey, setSwiperKey] = useState(0)
 
   const navigationPrevRef = useRef<HTMLButtonElement>(null)
   const navigationNextRef = useRef<HTMLButtonElement>(null)
+  const swiperRef = useRef<SwiperType | null>(null)
+
+  useEffect(() => {
+    setSwiperKey(prev => prev + 1)
+  }, [selectedValue, sortOrder])
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      swiperRef.current.navigation.init()
+      swiperRef.current.navigation.update()
+    }
+  }, [swiperKey])
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1000)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <div className={cn(className, "flex flex-col gap-3")}>
@@ -58,6 +82,16 @@ export const LastTasks: FC<LastTasksProps> = ({ className }) => {
               </button>
             </div>
           )}
+          <Button
+            onClick={() =>
+              setSortOrder(prev => (prev === "asc" ? "desc" : "asc"))
+            }
+            className="flex items-center gap-2 px-2 py-1"
+          >
+            {sortOrder === "asc" ? <ChevronDown /> : <ChevronUp />}
+            By deadline
+          </Button>
+
           <DropdownButton
             value={selectedValue}
             options={filterLastTaskData.map(f => ({
@@ -71,7 +105,27 @@ export const LastTasks: FC<LastTasksProps> = ({ className }) => {
       </div>
 
       <div className="relative">
-        {filteredTasks.length === 0 ? (
+        {isLoading ? (
+          <Swiper
+            key="skeleton-swiper"
+            modules={[Navigation]}
+            spaceBetween={12}
+            slidesPerView={3}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              768: { slidesPerView: 2.5 },
+              1024: { slidesPerView: 3 },
+            }}
+            style={{ padding: "4px 0" }}
+          >
+            {[...Array(3)].map((_, index) => (
+              <SwiperSlide key={`skeleton-${index}`} style={{ height: "auto" }}>
+                <TaskSkeleton />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : filteredTasks.length === 0 ? (
           <Card color="dashboard" className="col-span-3 py-6">
             <p className="text-gray-text text-center text-lg font-bold">
               No tasks match the filter
@@ -79,13 +133,17 @@ export const LastTasks: FC<LastTasksProps> = ({ className }) => {
           </Card>
         ) : (
           <Swiper
-            key={selectedValue}
+            key={`swiper-${swiperKey}`}
             modules={[Navigation]}
             spaceBetween={12}
             slidesPerView={3}
             navigation={{
               prevEl: navigationPrevRef.current,
               nextEl: navigationNextRef.current,
+              disabledClass: "opacity-50 cursor-default",
+            }}
+            onSwiper={swiper => {
+              swiperRef.current = swiper
             }}
             breakpoints={{
               0: { slidesPerView: 1 },
