@@ -20,7 +20,10 @@ import { DropdownButton } from "@/src/shared/ui/dropdown-button"
 import { Task } from "@/src/shared/ui/task"
 import { TaskSkeleton } from "@/src/shared/ui/task/skeleton"
 import { cn } from "@/src/shared/utils/cn"
-import { filterTasks } from "@/src/widget/last-tasks/model/filter-task"
+import {
+  filterTasks,
+  getTaskCounts,
+} from "@/src/widget/last-tasks/model/filter-task"
 import { filterLastTaskData } from "@/src/widget/last-tasks/model/filter.data"
 
 interface LastTasksProps {
@@ -32,8 +35,11 @@ export const LastTasks: FC<LastTasksProps> = ({ className }) => {
     useState<LastTaskFilter["value"]>("all")
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc")
   const [isLoading, setIsLoading] = useState(true)
-  const filteredTasks = filterTasks(MockTasks, selectedValue, sortOrder)
   const [swiperKey, setSwiperKey] = useState(0)
+
+  const filteredTasks = filterTasks(MockTasks, selectedValue, sortOrder)
+  const taskCounts = getTaskCounts(MockTasks)
+  const filterOptions = filterLastTaskData(taskCounts)
 
   const navigationPrevRef = useRef<HTMLButtonElement>(null)
   const navigationNextRef = useRef<HTMLButtonElement>(null)
@@ -94,10 +100,7 @@ export const LastTasks: FC<LastTasksProps> = ({ className }) => {
 
           <DropdownButton
             value={selectedValue}
-            options={filterLastTaskData.map(f => ({
-              value: f.value,
-              label: f.label,
-            }))}
+            options={filterOptions}
             onSelect={setSelectedValue}
             activeOptionClassName="bg-primary text-white"
           />

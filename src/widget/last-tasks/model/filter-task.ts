@@ -1,4 +1,26 @@
 import { MockTasks } from "@/src/data/tasks.data"
+import type { ITask } from "@/src/shared/types/task.types"
+
+export const getTaskCounts = (tasks: ITask[]) => {
+  return {
+    all: tasks.length,
+    completed: tasks.filter(
+      task =>
+        task.subTasks.length > 0 &&
+        task.subTasks.every(subTask => subTask.isCompleted)
+    ).length,
+    incomplete: tasks.filter(
+      task =>
+        task.subTasks.length > 0 &&
+        task.subTasks.every(subTask => !subTask.isCompleted)
+    ).length,
+    partial: tasks.filter(
+      task =>
+        task.subTasks.some(subTask => subTask.isCompleted) &&
+        task.subTasks.some(subTask => !subTask.isCompleted)
+    ).length,
+  }
+}
 
 export const filterTasks = (
   tasks: typeof MockTasks,
