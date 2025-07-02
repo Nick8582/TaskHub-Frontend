@@ -10,8 +10,8 @@ import type { Swiper as SwiperType } from "swiper"
 
 import type { ITask } from "@/src/shared/types/task.types"
 import { Card } from "@/src/shared/ui/card"
-import { Task } from "@/src/shared/ui/task"
-import { TaskSkeleton } from "@/src/shared/ui/task/skeleton"
+import { Task } from "@/src/widget/last-tasks/ui"
+import { TaskSkeleton } from "@/src/widget/last-tasks/ui/skeleton"
 
 interface LastTaskCardsProps {
   isLoading: boolean

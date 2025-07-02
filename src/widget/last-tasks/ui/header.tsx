@@ -1,6 +1,12 @@
 import { type FC, type RefObject } from "react"
 
-import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react"
+import {
+  ArrowDown01,
+  ArrowDownUp,
+  ArrowUp01,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react"
 
 import type { LastTaskFilter } from "@/src/shared/types/dashboard/filter-last-task.type"
 import type { ITask } from "@/src/shared/types/task.types"
@@ -11,8 +17,8 @@ import { cn } from "@/src/shared/utils/cn"
 interface LastTaskHeaderProps {
   isLoading?: boolean
   filteredTasks: ITask[]
-  sortOrder: "asc" | "desc"
-  setSortOrder: (value: "asc" | "desc") => void
+  sortOrder: "asc" | "desc" | ""
+  setSortOrder: (value: "asc" | "desc" | "") => void
   selectedValue: LastTaskFilter["value"]
   filterOptions: LastTaskFilter[]
   setSelectedValue: (value: LastTaskFilter["value"]) => void
@@ -34,6 +40,8 @@ export const LastTaskHeader: FC<LastTaskHeaderProps> = ({
   const handleDedLine = () => {
     if (sortOrder === "asc") {
       setSortOrder("desc")
+    } else if (sortOrder === "desc") {
+      setSortOrder("")
     } else {
       setSortOrder("asc")
     }
@@ -46,7 +54,7 @@ export const LastTaskHeader: FC<LastTaskHeaderProps> = ({
         <span className="text-lg opacity-50">({filteredTasks.length})</span>
       </h2>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2">
         {filteredTasks.length > 3 && (
           <div className={cn("flex gap-2", isLoading && "hidden")}>
             <button
@@ -67,9 +75,17 @@ export const LastTaskHeader: FC<LastTaskHeaderProps> = ({
         )}
         <Button
           onClick={handleDedLine}
-          className="flex items-center gap-2 px-2 py-1"
+          className="flex items-center gap-2 px-3 py-1 text-sm"
         >
-          {sortOrder === "asc" ? <ChevronDown /> : <ChevronUp />}
+          <div className="h-4 w-4">
+            {sortOrder === "" ? (
+              <ArrowDownUp size={18} />
+            ) : sortOrder === "asc" ? (
+              <ArrowDown01 size={18} />
+            ) : (
+              <ArrowUp01 size={18} />
+            )}
+          </div>
           By deadline
         </Button>
 
@@ -78,6 +94,7 @@ export const LastTaskHeader: FC<LastTaskHeaderProps> = ({
           options={filterOptions}
           onSelect={setSelectedValue}
           activeOptionClassName="bg-primary text-white"
+          buttonClassName="w-46"
         />
       </div>
     </div>

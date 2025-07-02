@@ -25,13 +25,16 @@ export const getTaskCounts = (tasks: ITask[]) => {
 export const filterTasks = (
   tasks: typeof MockTasks,
   filterValue: string,
-  sortOrder: "asc" | "desc" = "asc"
+  sortOrder: "asc" | "desc" | "" = ""
 ) => {
-  const sortedTasks = [...tasks].sort((a, b) => {
-    const dateA = a.dueDate.getTime()
-    const dateB = b.dueDate.getTime()
-    return sortOrder === "asc" ? dateA - dateB : dateB - dateA
-  })
+  const sortedTasks =
+    sortOrder === ""
+      ? [...tasks]
+      : [...tasks].sort((a, b) => {
+          const dateA = a.dueDate.getTime()
+          const dateB = b.dueDate.getTime()
+          return sortOrder === "asc" ? dateA - dateB : dateB - dateA
+        })
 
   switch (filterValue) {
     case "completed":

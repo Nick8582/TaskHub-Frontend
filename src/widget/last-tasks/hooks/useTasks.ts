@@ -12,7 +12,7 @@ export const useTasks = () => {
   const [selectedValue, setSelectedValue] = useState<
     "all" | "completed" | "incomplete" | "partial"
   >("all")
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc")
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "">("")
   const [isLoading, setIsLoading] = useState(true)
   const [swiperKey, setSwiperKey] = useState(0)
 
