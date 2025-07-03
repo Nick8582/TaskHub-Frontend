@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --color-black-opacity: #00000083;
+
   --color-hard-dark: #1f2937;
   --color-hard-white: #fff;
   --color-hard-purple: #d8c1fb;
@@ -101,5 +103,27 @@ body {
       --color-primary: var(--color-dark-primary);
       --color-primary-light: var(--color-dark-primary-light);
     }
+  }
+}
+
+input:checked ~ span:first-of-type {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  animation: checkAnim 0.4s ease;
+}
+
+input:checked ~ svg {
+  opacity: 1;
+}
+
+@keyframes checkAnim {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
   }
 }

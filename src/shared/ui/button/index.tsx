@@ -1,8 +1,8 @@
-import type { FC, ReactNode } from "react"
+import type { ButtonHTMLAttributes, FC, ReactNode } from "react"
 
 import { cn } from "@/src/shared/utils/cn"
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
   square?: boolean
   className?: string

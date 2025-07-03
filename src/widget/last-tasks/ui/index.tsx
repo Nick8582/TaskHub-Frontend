@@ -3,6 +3,7 @@ import Image from "next/image"
 
 import { Folder, Link, MessageCircleMore, Pencil, Plus } from "lucide-react"
 
+import { useModal } from "@/src/entities/modals/models/use-modal"
 import type { ITask } from "@/src/shared/types/task.types"
 import { Card } from "@/src/shared/ui/card"
 import { ProgressBar } from "@/src/shared/ui/progress"
@@ -15,6 +16,8 @@ export const Task: FC<TaskProps> = ({ task }) => {
   const completedCount = task.subTasks.filter(t => t.isCompleted).length
   const totalCount = task.subTasks.length
   const progress = Math.round((completedCount / totalCount) * 100)
+
+  const { openModal } = useModal()
 
   return (
     <Card color="dashboard" className="flex h-full flex-col justify-between">
@@ -68,7 +71,10 @@ export const Task: FC<TaskProps> = ({ task }) => {
             <button className="bg-primary text-hard-white border-primary hover:bg-hard-white hover:text-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-all">
               <Plus />
             </button>
-            <button className="bg-hard-white text-primary hover:bg-primary hover:text-hard-white border-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-all">
+            <button
+              onClick={() => openModal("taskCardEdit", { task: task })}
+              className="bg-hard-white text-primary hover:bg-primary hover:text-hard-white border-primary flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border transition-all"
+            >
               <Pencil />
             </button>
           </div>
