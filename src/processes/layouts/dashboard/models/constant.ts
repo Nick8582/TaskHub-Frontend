@@ -39,3 +39,16 @@ export const NAVIGATION_LINK: DashboardNavigationType[] = [
     icon: "Settings",
   },
 ]
+
+export const ACCOUNT_LINK: DashboardNavigationType[] = [
+  {
+    href: RouteDashboard.PROFILE,
+    label: "Profile",
+    icon: "User",
+  },
+  {
+    href: RouteDashboard.SETTING,
+    label: "Setting",
+    icon: "Settings",
+  },
+]

@@ -6,6 +6,7 @@ export const RouteDashboard = {
   SCHEDULE: "/schedule",
   REPORT: "/report",
   SETTING: "/setting",
+  PROFILE: "/profile",
 } as const
 
 export type RouteDashboard =

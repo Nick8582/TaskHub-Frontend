@@ -125,7 +125,7 @@ const DropdownButtonComponent = <T extends React.Key>({
         aria-expanded={isOpen}
         aria-controls={listboxId}
       >
-        {selectedOption?.label ?? "Выберите..."}
+        {selectedOption?.label ?? "Selected..."}
         <ChevronDown
           size={16}
           className={cn(
