@@ -3,12 +3,16 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 import type { ReactNode } from "react"
-import { Geist } from "next/font/google"
+import { Poppins } from "next/font/google"
 
 import { Providers } from "@/app/providers"
 import { SITE_NAME } from "@/shared/constants/seo.constants"
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
+const font = Poppins({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+})
 
 export const metadata: Metadata = {
   title: {
@@ -45,7 +49,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
-      <body className={`${geistSans.variable} antialiased`}>
+      <body className={`${font.variable} antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

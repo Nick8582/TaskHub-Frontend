@@ -4,9 +4,9 @@ import { Sidebar } from "@/components/layout/Sidebar"
 
 export default function DashboardLayout({ children }: PropsWithChildren) {
   return (
-    <div>
+    <div className="grid h-screen grid-cols-[250px_1fr]">
       <Sidebar />
-      <main>{children}</main>
+      <main className="p-5">{children}</main>
     </div>
   )
 }
