@@ -1,9 +1,14 @@
 import type { Metadata } from "next"
 
-import "../processes/styles/globals.css"
+import "./globals.css"
 
-import { Providers } from "@/src/app/providers"
-import { SITE_NAME } from "@/src/shared/constants/seo.constants"
+import type { ReactNode } from "react"
+import { Geist } from "next/font/google"
+
+import { Providers } from "@/app/providers"
+import { SITE_NAME } from "@/shared/constants/seo.constants"
+
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: {
@@ -28,7 +33,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -40,7 +45,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
-      <body>
+      <body className={`${geistSans.variable} antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>
