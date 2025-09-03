@@ -4,6 +4,7 @@ import type { FC } from "react"
 
 import { Heading } from "@/ui/Heading"
 import { SearchField } from "@/ui/SearchField"
+import { ProjectStatisticChart } from "@/view/dashboard/components/ProjectStatisticChart"
 import { ProjectStats } from "@/view/dashboard/components/ProjectStats"
 
 export const DashboardPage: FC = () => {
@@ -16,7 +17,7 @@ export const DashboardPage: FC = () => {
         </div>
         <div className="grid grid-cols-[25%_75%] gap-6">
           <ProjectStats />
-          <div>CHART</div>
+          <ProjectStatisticChart />
         </div>
       </div>
       <div className="flex h-screen items-center justify-center p-5">CHAT</div>
