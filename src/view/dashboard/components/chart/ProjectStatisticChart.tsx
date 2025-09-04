@@ -1,8 +1,8 @@
 import { useState, type FC } from "react"
 
 import type { ITimeRange } from "@/types/project-chart.types"
-import { ProjectChart } from "@/view/dashboard/components/ProjectChart"
-import { ProjectChartHeader } from "@/view/dashboard/components/ProjectChartHeader"
+import { ProjectChart } from "@/view/dashboard/components/chart/ProjectChart"
+import { ProjectChartHeader } from "@/view/dashboard/components/chart/ProjectChartHeader"
 import {
   monthlyData,
   timeRanges,

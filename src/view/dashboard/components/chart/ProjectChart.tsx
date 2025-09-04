@@ -12,7 +12,7 @@ import {
 } from "recharts"
 
 import type { IChartDataPoint } from "@/types/project-chart.types"
-import { ProjectChartTooltip } from "@/view/dashboard/components/ProjectChartTooltip"
+import { ProjectChartTooltip } from "@/view/dashboard/components/chart/ProjectChartTooltip"
 
 interface ProjectChartProps {
   data: IChartDataPoint[]
