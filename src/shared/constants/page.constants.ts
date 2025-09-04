@@ -1,5 +1,5 @@
 export class Pages {
-  static BASE = "/dashboard"
+  static BASE = '/dashboard'
 
   static DASHBOARD = Pages.BASE
   static MESSAGES = `${Pages.BASE}/messages `

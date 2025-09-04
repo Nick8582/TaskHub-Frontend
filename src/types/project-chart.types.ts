@@ -1,6 +1,6 @@
 export interface ITimeRange {
   label: string
-  value: "yearly" | "monthly"
+  value: 'yearly' | 'monthly'
 }
 
 export interface IChartDataPoint {

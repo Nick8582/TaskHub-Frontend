@@ -1,9 +1,9 @@
-import type { Metadata } from "next"
+import type { Metadata } from 'next'
 
-import { NO_INDEX_PAGE } from "@/shared/constants/seo.constants"
+import { NO_INDEX_PAGE } from '@/shared/constants/seo.constants'
 
 export const metadata: Metadata = {
-  title: "Settings",
+  title: 'Settings',
   ...NO_INDEX_PAGE,
 }
 

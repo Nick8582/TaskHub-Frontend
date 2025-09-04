@@ -1,50 +1,50 @@
-import type { IChartDataPoint, ITimeRange } from "@/types/project-chart.types"
+import type { IChartDataPoint, ITimeRange } from '@/types/project-chart.types'
 
 export const yearlyData: IChartDataPoint[] = [
   {
-    period: "Jan",
+    period: 'Jan',
     value: 19,
   },
   {
-    period: "Feb",
+    period: 'Feb',
     value: 14,
   },
   {
-    period: "Mar",
+    period: 'Mar',
     value: 27,
   },
   {
-    period: "Apr",
+    period: 'Apr',
     value: 38,
   },
   {
-    period: "May",
+    period: 'May',
     value: 35,
   },
   {
-    period: "Jun",
+    period: 'Jun',
     value: 20,
   },
   {
-    period: "Jul",
+    period: 'Jul',
     value: 23,
   },
 ]
 
 export const monthlyData: IChartDataPoint[] = [
-  { period: "Week 1", value: 12 },
-  { period: "Week 2", value: 19 },
-  { period: "Week 3", value: 15 },
-  { period: "Week 4", value: 25 },
+  { period: 'Week 1', value: 12 },
+  { period: 'Week 2', value: 19 },
+  { period: 'Week 3', value: 15 },
+  { period: 'Week 4', value: 25 },
 ]
 
 export const timeRanges: ITimeRange[] = [
   {
-    label: "Yearly",
-    value: "yearly",
+    label: 'Yearly',
+    value: 'yearly',
   },
   {
-    label: "Monthly",
-    value: "monthly",
+    label: 'Monthly',
+    value: 'monthly',
   },
 ]

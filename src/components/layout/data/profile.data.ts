@@ -1,8 +1,8 @@
-import type { IProfile } from "@/types/profile.types"
+import type { IProfile } from '@/types/profile.types'
 
 export const PROFILE: IProfile = {
-  id: "1",
-  name: "Awe Std",
-  email: "awestd@gmail.com",
-  avatarPath: "https://avatars.githubusercontent.com/u/1",
+  id: '1',
+  name: 'Awe Std',
+  email: 'awestd@gmail.com',
+  avatarPath: 'https://avatars.githubusercontent.com/u/1',
 }
