@@ -17,3 +17,5 @@ export interface ITask extends Omit<ISubTask, 'isCompleted'> {
   resources: string[]
   links: string[]
 }
+
+export type TTaskStatus = 'not-started' | 'in-progress' | 'completed'
