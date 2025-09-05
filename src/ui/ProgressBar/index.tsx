@@ -1,7 +1,8 @@
 import { useMemo, type FC } from 'react'
 
-import clsx from 'clsx'
 import { CheckCircle } from 'lucide-react'
+
+import { cn } from '@/utils'
 
 interface ProgressBarProps {
   progress: number
@@ -32,9 +33,10 @@ export const ProgressBar: FC<ProgressBarProps> = ({ progress }) => {
   return (
     <div className='relative h-12 w-full overflow-hidden rounded-full bg-primary/15'>
       <div
-        className={clsx(
-          'animate-stripes flex h-full items-center justify-center rounded-full bg-[length:56px_56px] font-medium text-white',
-          colorProgressBar
+        className={cn(
+          'flex h-full items-center justify-center rounded-full bg-[length:56px_56px] font-medium text-white',
+          colorProgressBar,
+          { 'animate-stripes': clamped < 100 }
         )}
         style={{
           width: `${clamped}%`,

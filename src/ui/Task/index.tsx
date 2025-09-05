@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import {
   Edit2,
@@ -9,6 +10,7 @@ import {
   Plus,
 } from 'lucide-react'
 
+import { Pages } from '@/shared/constants/page.constants'
 import type { ITask } from '@/types/task.types'
 import { ProgressBar } from '@/ui/ProgressBar'
 
@@ -75,9 +77,12 @@ export const Task: FC<TaskProps> = ({ task }) => {
           <button className='rounded-full bg-primary p-2 text-white transition-colors hover:bg-primary/90'>
             <Plus size={18} />
           </button>
-          <button className='rounded-full border border-primary bg-white p-2 text-primary transition-colors hover:bg-primary/10'>
+          <Link
+            href={Pages.TASK_EDIT(task.id)}
+            className='rounded-full border border-primary bg-white p-2 text-primary transition-colors hover:bg-primary/10'
+          >
             <Edit2 size={18} />
-          </button>
+          </Link>
         </div>
       </div>
     </div>
