@@ -1,27 +1,44 @@
 import { useMemo, useState, type FC } from 'react'
 
-import type { TTaskStatus } from '@/types/task.types'
+import type { TTaskSortBy, TTaskStatus } from '@/types/task.types'
 import { Task } from '@/ui/Task'
 import { LastTasksFilter } from '@/view/dashboard/components/last-tasks/LastTasksFilter'
+import { LastTasksSort } from '@/view/dashboard/components/last-tasks/LastTasksSort'
 import { LAST_TASKS } from '@/view/dashboard/data/last-tasks.data'
 
 export const LastTasks: FC = () => {
   const [status, setStatus] = useState<TTaskStatus | null>(null)
+  const [sortByDueDate, setSortByDueDate] = useState<TTaskSortBy>('asc')
 
   const filteredTasks = useMemo(() => {
-    if (!status) return LAST_TASKS
+    const filtered = !status
+      ? LAST_TASKS
+      : LAST_TASKS.filter(task => {
+          switch (status) {
+            case 'not-started':
+              return task.subTasks.every(subTask => !subTask.isCompleted)
+            case 'in-progress':
+              return task.subTasks.some(subTask => !subTask.isCompleted)
+            case 'completed':
+              return task.subTasks.every(subTask => subTask.isCompleted)
+            default:
+              return true
+          }
+        })
 
-    switch (status) {
-      case 'not-started':
-        return LAST_TASKS.filter(task => task.subTasks.every(subTask => !subTask.isCompleted))
-      case 'in-progress':
-        return LAST_TASKS.filter(task => task.subTasks.some(subTask => !subTask.isCompleted))
-      case 'completed':
-        return LAST_TASKS.filter(task => task.subTasks.every(subTask => subTask.isCompleted))
-      default:
-        return LAST_TASKS
-    }
-  }, [status])
+    const sortedTask = filtered.sort((a, b) => {
+      const dateA = new Date(a.dueDate).getTime()
+      const dateB = new Date(b.dueDate).getTime()
+
+      if (sortByDueDate === 'asc') {
+        return dateA - dateB
+      } else {
+        return dateB - dateA
+      }
+    })
+
+    return sortedTask
+  }, [status, sortByDueDate])
 
   return (
     <div>
@@ -30,7 +47,10 @@ export const LastTasks: FC = () => {
           Last Tasks{' '}
           <span className='text-lg font-normal opacity-40'>({filteredTasks.length})</span>
         </h2>
-        <LastTasksFilter setStatus={setStatus} status={status} />
+        <div className='flex items-center gap-2'>
+          <LastTasksFilter setStatus={setStatus} status={status} />
+          <LastTasksSort sortByDueDate={sortByDueDate} setSortByDueDate={setSortByDueDate} />
+        </div>
       </div>
       {filteredTasks.length ? (
         <div className='grid grid-cols-3 gap-6'>
