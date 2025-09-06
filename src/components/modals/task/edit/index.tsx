@@ -4,6 +4,9 @@ import { useEffect, type FC } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { X } from 'lucide-react'
+import { useForm } from 'react-hook-form'
+
+import type { TTaskFormData } from '@/types/task.types'
 
 interface TaskEditModalClientProps {
   id: string
@@ -26,6 +29,8 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = ({ id }) => {
     document.addEventListener('keydown', handleEscape)
     return () => document.removeEventListener('keydown', handleEscape)
   }, [])
+
+  useForm<TTaskFormData>()
 
   return (
     <div
