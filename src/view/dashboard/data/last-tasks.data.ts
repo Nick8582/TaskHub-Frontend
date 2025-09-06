@@ -1,16 +1,3 @@
-import {
-  BarChart,
-  Briefcase,
-  Clock,
-  Code,
-  Database,
-  FileText,
-  Layers,
-  Settings,
-  Shield,
-  Users,
-} from 'lucide-react'
-
 import { USERS } from '@/mock/users.data'
 import type { ITask } from '@/types/task.types'
 
@@ -18,7 +5,7 @@ export const LAST_TASKS: ITask[] = [
   {
     id: '1',
     title: 'Complete development project',
-    icon: Code,
+    icon: 'Code',
     dueDate: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000),
     users: [USERS[0], USERS[1], USERS[2]],
     subTasks: [
@@ -33,7 +20,7 @@ export const LAST_TASKS: ITask[] = [
   {
     id: '2',
     title: 'Prepare quarterly presentation',
-    icon: FileText,
+    icon: 'FileText',
     dueDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
     users: [USERS[3], USERS[4]],
     subTasks: [{ id: '2-1', title: 'Collect performance data', isCompleted: true }],
@@ -44,7 +31,7 @@ export const LAST_TASKS: ITask[] = [
   {
     id: '3',
     title: 'Client onboarding meeting',
-    icon: Briefcase,
+    icon: 'Briefcase',
     dueDate: new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
     users: [USERS[0]],
     subTasks: [
@@ -61,7 +48,7 @@ export const LAST_TASKS: ITask[] = [
   {
     id: '4',
     title: 'Update database schema',
-    icon: Database,
+    icon: 'Database',
     dueDate: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000),
     users: [USERS[1], USERS[5]],
     subTasks: [
@@ -75,7 +62,7 @@ export const LAST_TASKS: ITask[] = [
   {
     id: '5',
     title: 'Team building event',
-    icon: Users,
+    icon: 'Users',
     dueDate: new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000),
     users: [USERS[2], USERS[4]],
     subTasks: [
@@ -89,7 +76,7 @@ export const LAST_TASKS: ITask[] = [
   {
     id: '6',
     title: 'Security audit',
-    icon: Shield,
+    icon: 'Shield',
     dueDate: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
     users: [USERS[3], USERS[0], USERS[1]],
     subTasks: [
@@ -103,7 +90,7 @@ export const LAST_TASKS: ITask[] = [
   {
     id: '7',
     title: 'Infrastructure maintenance',
-    icon: Settings,
+    icon: 'Settings',
     dueDate: new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000),
     users: [USERS[5]],
     subTasks: [
@@ -117,7 +104,7 @@ export const LAST_TASKS: ITask[] = [
   {
     id: '8',
     title: 'Marketing campaign analysis',
-    icon: BarChart,
+    icon: 'BarChart',
     dueDate: new Date(new Date().getTime() + 4 * 24 * 60 * 60 * 1000),
     users: [USERS[4], USERS[2]],
     subTasks: [
@@ -131,7 +118,7 @@ export const LAST_TASKS: ITask[] = [
   {
     id: '9',
     title: 'Product roadmap planning',
-    icon: Layers,
+    icon: 'Layers',
     dueDate: new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000),
     users: [USERS[0], USERS[3], USERS[5]],
     subTasks: [
@@ -145,7 +132,7 @@ export const LAST_TASKS: ITask[] = [
   {
     id: '10',
     title: 'Time tracking implementation',
-    icon: Clock,
+    icon: 'Clock',
     dueDate: new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000),
     users: [USERS[1], USERS[4]],
     subTasks: [

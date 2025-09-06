@@ -13,6 +13,7 @@ import {
 import { Pages } from '@/shared/constants/page.constants'
 import type { ITask } from '@/types/task.types'
 import { ProgressBar } from '@/ui/ProgressBar'
+import { ICON_MAP } from '@/utils/icon-map'
 
 interface TaskProps {
   task: ITask
@@ -23,21 +24,29 @@ export const Task: FC<TaskProps> = ({ task }) => {
   const totalCount = task.subTasks.length
   const progress = Math.round((completedCount / totalCount) * 100)
 
+  const IconComponent = ICON_MAP[task.icon]
+
+  const daysUntilDue = Math.ceil((task.dueDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+  const dueText =
+    daysUntilDue === 0
+      ? 'Today'
+      : daysUntilDue === 1
+        ? 'Tomorrow'
+        : daysUntilDue > 1
+          ? `${daysUntilDue} days`
+          : 'Overdue'
+
   return (
     <div className='flex flex-col rounded-xl bg-card p-3.5'>
       <div className='mb-3 flex flex-1 items-start justify-between'>
-        <div className='flex h-full items-start gap-4'>
+        <div className='flex items-start gap-4'>
           <div className='flex items-center justify-center rounded-full bg-primary/10 p-1.5 text-primary'>
-            <task.icon />
+            <IconComponent size={18} />
           </div>
-          <div className='flex h-full w-full flex-col'>
-            <div className='flex-1 leading-tight font-medium wrap-normal opacity-90'>
-              {task.title}
-            </div>
+          <div className='flex flex-col'>
+            <div className='font-medium opacity-90'>{task.title}</div>
             <div>
-              <span className='text-sm opacity-50'>
-                Due: {Math.ceil((+task.dueDate - Date.now()) / (1000 * 60 * 60 * 24))} days
-              </span>
+              <span className='text-sm opacity-50'>Due: {dueText}</span>
             </div>
           </div>
         </div>
