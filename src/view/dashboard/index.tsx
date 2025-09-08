@@ -7,6 +7,7 @@ import { SearchField } from '@/ui/SearchField'
 import { ProjectStatisticChart } from '@/view/dashboard/components/chart/ProjectStatisticChart'
 import { LastTasks } from '@/view/dashboard/components/last-tasks/LastTasks'
 import { ProjectStats } from '@/view/dashboard/components/stat/ProjectStats'
+import { TaskTimeline } from '@/view/dashboard/components/task-timeline/TaskTimeline'
 
 export const DashboardPage: FC = () => {
   return (
@@ -21,6 +22,7 @@ export const DashboardPage: FC = () => {
           <ProjectStatisticChart />
         </div>
         <LastTasks />
+        <TaskTimeline />
       </div>
       <div className='flex h-screen items-center justify-center p-5'>CHAT</div>
     </div>

@@ -11,7 +11,7 @@ export const LastTasks: FC = observer(() => {
   const filteredTasks = taskStore.filteredTasks
 
   return (
-    <div>
+    <div className='mb-6'>
       <div className='mb-5 flex items-center justify-between'>
         <h2 className='text-xl font-medium'>
           Last Tasks{' '}

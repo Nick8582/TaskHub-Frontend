@@ -1,7 +1,8 @@
-import type { FC } from 'react'
+import { useMemo, type FC } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { isToday } from 'date-fns'
 import { Edit2, Image as LucideImage, Link as LucideLink, MessageSquareMore } from 'lucide-react'
 import { observer } from 'mobx-react-lite'
 
@@ -22,7 +23,7 @@ export const Task: FC<TaskProps> = observer(({ task }) => {
 
   const IconComponent = ICON_MAP[task.icon]
 
-  const daysUntilDue = Math.ceil((task.dueDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+  const daysUntilDue = Math.ceil((task.dueDate.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
   const dueText =
     daysUntilDue === 0
       ? 'Today'
@@ -31,6 +32,14 @@ export const Task: FC<TaskProps> = observer(({ task }) => {
         : daysUntilDue > 1
           ? `${daysUntilDue} days`
           : 'Overdue'
+
+  const dueDate = useMemo(
+    () =>
+      isToday(task.dueDate.date)
+        ? 'Today'
+        : Math.ceil((task.dueDate.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) + ' days',
+    [task.dueDate.date]
+  )
 
   return (
     <div className='flex flex-col rounded-xl bg-card p-3.5'>
@@ -42,7 +51,7 @@ export const Task: FC<TaskProps> = observer(({ task }) => {
           <div className='flex flex-col'>
             <div className='font-medium opacity-90'>{task.title}</div>
             <div>
-              <span className='text-sm opacity-50'>Due: {dueText}</span>
+              <span className='text-sm opacity-50'>Due: {dueDate}</span>
             </div>
           </div>
         </div>

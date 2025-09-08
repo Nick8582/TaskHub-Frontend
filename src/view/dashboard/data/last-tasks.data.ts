@@ -1,3 +1,5 @@
+import { setHours, setMinutes } from 'date-fns'
+
 import { USERS } from '@/mock/users.data'
 import type { ITask } from '@/types/task.types'
 
@@ -6,7 +8,11 @@ export const LAST_TASKS: ITask[] = [
     id: '1',
     title: 'Complete development project',
     icon: 'Code',
-    dueDate: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000),
+    dueDate: {
+      date: new Date(),
+      startTime: setMinutes(setHours(new Date(), 9), 50),
+      endTime: setMinutes(setHours(new Date(), 12), 10),
+    },
     users: [USERS[0], USERS[1], USERS[2]],
     subTasks: [
       { id: '1-1', title: 'Write unit tests', isCompleted: false },
@@ -21,7 +27,11 @@ export const LAST_TASKS: ITask[] = [
     id: '2',
     title: 'Prepare quarterly presentation',
     icon: 'FileText',
-    dueDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+    dueDate: {
+      date: new Date(),
+      startTime: setMinutes(setHours(new Date(), 13), 0),
+      endTime: setMinutes(setHours(new Date(), 15), 30),
+    },
     users: [USERS[3], USERS[4]],
     subTasks: [{ id: '2-1', title: 'Collect performance data', isCompleted: true }],
     comments: ['Data approved by leadership team'],
@@ -32,7 +42,9 @@ export const LAST_TASKS: ITask[] = [
     id: '3',
     title: 'Client onboarding meeting',
     icon: 'Briefcase',
-    dueDate: new Date(new Date().getTime() + 10 * 24 * 60 * 60 * 1000),
+    dueDate: {
+      date: new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000),
+    },
     users: [USERS[0]],
     subTasks: [
       { id: '3-1', title: 'Prepare contract', isCompleted: true },
@@ -49,7 +61,11 @@ export const LAST_TASKS: ITask[] = [
     id: '4',
     title: 'Update database schema',
     icon: 'Database',
-    dueDate: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000),
+    dueDate: {
+      date: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000),
+      startTime: setMinutes(setHours(new Date(), 13), 0),
+      endTime: setMinutes(setHours(new Date(), 15), 30),
+    },
     users: [USERS[1], USERS[5]],
     subTasks: [
       { id: '4-1', title: 'Review migration scripts', isCompleted: false },
@@ -63,7 +79,11 @@ export const LAST_TASKS: ITask[] = [
     id: '5',
     title: 'Team building event',
     icon: 'Users',
-    dueDate: new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000),
+    dueDate: {
+      date: new Date(new Date().getTime() + 4 * 24 * 60 * 60 * 1000),
+      startTime: setMinutes(setHours(new Date(), 13), 0),
+      endTime: setMinutes(setHours(new Date(), 15), 30),
+    },
     users: [USERS[2], USERS[4]],
     subTasks: [
       { id: '5-1', title: 'Choose venue', isCompleted: true },
@@ -77,7 +97,11 @@ export const LAST_TASKS: ITask[] = [
     id: '6',
     title: 'Security audit',
     icon: 'Shield',
-    dueDate: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
+    dueDate: {
+      date: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000),
+      startTime: setMinutes(setHours(new Date(), 13), 0),
+      endTime: setMinutes(setHours(new Date(), 15), 30),
+    },
     users: [USERS[3], USERS[0], USERS[1]],
     subTasks: [
       { id: '6-1', title: 'Review access logs', isCompleted: true },
@@ -91,7 +115,11 @@ export const LAST_TASKS: ITask[] = [
     id: '7',
     title: 'Infrastructure maintenance',
     icon: 'Settings',
-    dueDate: new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000),
+    dueDate: {
+      date: new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000),
+      startTime: setMinutes(setHours(new Date(), 13), 0),
+      endTime: setMinutes(setHours(new Date(), 15), 30),
+    },
     users: [USERS[5]],
     subTasks: [
       { id: '7-1', title: 'Update server OS', isCompleted: false },
@@ -105,7 +133,11 @@ export const LAST_TASKS: ITask[] = [
     id: '8',
     title: 'Marketing campaign analysis',
     icon: 'BarChart',
-    dueDate: new Date(new Date().getTime() + 4 * 24 * 60 * 60 * 1000),
+    dueDate: {
+      date: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
+      startTime: setMinutes(setHours(new Date(), 13), 0),
+      endTime: setMinutes(setHours(new Date(), 15), 30),
+    },
     users: [USERS[4], USERS[2]],
     subTasks: [
       { id: '8-1', title: 'Collect campaign metrics', isCompleted: true },
@@ -119,7 +151,11 @@ export const LAST_TASKS: ITask[] = [
     id: '9',
     title: 'Product roadmap planning',
     icon: 'Layers',
-    dueDate: new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000),
+    dueDate: {
+      date: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000),
+      startTime: setMinutes(setHours(new Date(), 13), 0),
+      endTime: setMinutes(setHours(new Date(), 15), 30),
+    },
     users: [USERS[0], USERS[3], USERS[5]],
     subTasks: [
       { id: '9-1', title: 'Gather feature requests', isCompleted: true },
@@ -133,7 +169,9 @@ export const LAST_TASKS: ITask[] = [
     id: '10',
     title: 'Time tracking implementation',
     icon: 'Clock',
-    dueDate: new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000),
+    dueDate: {
+      date: new Date(new Date().getTime() + 8 * 24 * 60 * 60 * 1000),
+    },
     users: [USERS[1], USERS[4]],
     subTasks: [
       { id: '10-1', title: 'Evaluate tools', isCompleted: true },

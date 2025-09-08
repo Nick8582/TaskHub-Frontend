@@ -61,7 +61,11 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
   useEffect(() => {
     const task = taskStore.getTaskById(id)
     if (!task) return
-    form.reset({ title: task.title, dueDate: new Date(task.dueDate), icon: task.icon })
+    form.reset({
+      title: task.title,
+      dueDate: { date: new Date(task.dueDate.date) },
+      icon: task.icon,
+    })
   }, [id, form])
 
   const onSubmit = (data: TTaskFormData) => {
@@ -119,11 +123,16 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
                           className='w-full justify-start text-left font-normal data-[empty=true]:text-muted-foreground'
                         >
                           <CalendarIcon className='mr-2 h-4 w-4' />
-                          {value ? format(value, 'PPP') : <span>Pick a date</span>}
+                          {value ? format(value.date, 'PPP') : <span>Pick a date</span>}
                         </Button>
                       </Popover.Trigger>
                       <Popover.Content className='z-50 w-auto p-0' align='start'>
-                        <Calendar mode='single' selected={value} onSelect={onChange} initialFocus />
+                        <Calendar
+                          mode='single'
+                          selected={value.date}
+                          onSelect={onChange}
+                          initialFocus
+                        />
                       </Popover.Content>
                     </Popover.Root>
                   </FormControl>
@@ -147,7 +156,7 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
                             type='button'
                             key={name}
                             variant={value === name ? 'default' : 'outline'}
-                            onClick={() => onChange(name)} // ← ИСПРАВЛЕНО: передаем name, а не Icon
+                            onClick={() => onChange(name)}
                             className='h-10 w-10 p-0'
                           >
                             <Icon size={18} />

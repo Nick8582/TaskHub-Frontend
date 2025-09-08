@@ -9,7 +9,7 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children, modals }: DashboardLayoutProps) {
   return (
-    <div className='grid h-screen grid-cols-[250px_1fr]'>
+    <div className='min- grid min-h-screen grid-cols-[250px_1fr]'>
       <Sidebar />
       <main className='p-5'>{children}</main>
       {modals}
