@@ -2,7 +2,7 @@ import { useMemo, type FC } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { isToday } from 'date-fns'
+import { format, isToday } from 'date-fns'
 import { Edit2, Image as LucideImage, Link as LucideLink, MessageSquareMore } from 'lucide-react'
 import { observer } from 'mobx-react-lite'
 
@@ -10,13 +10,16 @@ import { CreateSubTaskModal } from '@/components/modals/task/create-sub-task'
 import { Pages } from '@/shared/constants/page.constants'
 import type { ITask } from '@/types/task.types'
 import { ProgressBar } from '@/ui/ProgressBar'
+import { cn } from '@/utils'
 import { ICON_MAP } from '@/utils/icon-map'
 
 interface TaskProps {
   task: ITask
+  isColor?: boolean
+  isMinimal?: boolean
 }
 
-export const Task: FC<TaskProps> = observer(({ task }) => {
+export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
   const completedCount = task.subTasks.filter(t => t.isCompleted).length
   const totalCount = task.subTasks.length
   const progress = Math.round((completedCount / totalCount) * 100)
@@ -42,16 +45,40 @@ export const Task: FC<TaskProps> = observer(({ task }) => {
   )
 
   return (
-    <div className='flex flex-col rounded-xl bg-card p-3.5'>
-      <div className='mb-3 flex flex-1 items-start justify-between'>
+    <div
+      className={cn(
+        'flex flex-col rounded-xl bg-card p-3.5',
+        isColor && task.color,
+        isColor && 'text-white'
+      )}
+    >
+      <div
+        className={cn(
+          'mb-3 flex flex-1 items-start justify-between',
+          isMinimal && 'mb-0 flex-col gap-3'
+        )}
+      >
         <div className='flex items-start gap-4'>
-          <div className='flex items-center justify-center rounded-full bg-primary/10 p-1.5 text-primary'>
+          <div
+            className={cn(
+              'flex items-center justify-center rounded-full bg-primary/10 p-1.5 text-primary',
+              isColor && 'bg-white text-primary'
+            )}
+          >
             <IconComponent size={18} />
           </div>
           <div className='flex flex-col'>
-            <div className='font-medium opacity-90'>{task.title}</div>
+            <div className={'leading-tight font-medium wrap-normal opacity-90'}>{task.title}</div>
             <div>
-              <span className='text-sm opacity-50'>Due: {dueDate}</span>
+              <span className={cn('text-sm opacity-50', isColor && 'opacity-75')}>
+                {isMinimal ? (
+                  <>
+                    {format(task.dueDate.startTime!, 'ha')} - {format(task.dueDate.endTime!, 'ha')}
+                  </>
+                ) : (
+                  <>Due: {dueDate}</>
+                )}
+              </span>
             </div>
           </div>
         </div>
@@ -70,33 +97,38 @@ export const Task: FC<TaskProps> = observer(({ task }) => {
         </div>
       </div>
 
-      <div className='mb-4'>
-        <ProgressBar progress={progress} />
-      </div>
-      <div className='flex items-center justify-between'>
-        <div className='flex items-center gap-4'>
-          <span className='flex items-center gap-1'>
-            <MessageSquareMore className='opacity-40' size={16} /> {task.comments.length}
-          </span>
-          <span className='flex items-center gap-1'>
-            <LucideImage className='opacity-40' size={16} />
-            {task.resources.length}
-          </span>
-          <span className='flex items-center gap-1'>
-            <LucideLink className='opacity-40' size={16} />
-            {task.links.length}
-          </span>
+      {!isMinimal && (
+        <div className='mb-4'>
+          <ProgressBar progress={progress} />
         </div>
-        <div className='flex items-center gap-2'>
-          <CreateSubTaskModal taskId={task.id} />
-          <Link
-            href={Pages.TASK_EDIT(task.id)}
-            className='rounded-full border border-primary bg-white p-2 text-primary transition-colors hover:bg-primary/10'
-          >
-            <Edit2 size={18} />
-          </Link>
+      )}
+      {!isMinimal && (
+        <div className='flex items-center justify-between'>
+          <div className='flex items-center gap-4'>
+            <span className='flex items-center gap-1'>
+              <MessageSquareMore className={isColor ? 'opacity-80' : 'opacity-40'} size={16} />{' '}
+              {task.comments.length}
+            </span>
+            <span className='flex items-center gap-1'>
+              <LucideImage className={isColor ? 'opacity-80' : 'opacity-40'} size={16} />
+              {task.resources.length}
+            </span>
+            <span className='flex items-center gap-1'>
+              <LucideLink className={isColor ? 'opacity-80' : 'opacity-40'} size={16} />
+              {task.links.length}
+            </span>
+          </div>
+          <div className='flex items-center gap-2'>
+            <CreateSubTaskModal taskId={task.id} />
+            <Link
+              href={Pages.TASK_EDIT(task.id)}
+              className='rounded-full border border-primary bg-white p-2 text-primary transition-colors hover:bg-primary/10'
+            >
+              <Edit2 size={18} />
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 })

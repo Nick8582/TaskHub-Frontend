@@ -8,6 +8,7 @@ export const LAST_TASKS: ITask[] = [
     id: '1',
     title: 'Complete development project',
     icon: 'Code',
+    color: 'bg-violet-300',
     dueDate: {
       date: new Date(),
       startTime: setMinutes(setHours(new Date(), 9), 50),
@@ -27,6 +28,7 @@ export const LAST_TASKS: ITask[] = [
     id: '2',
     title: 'Prepare quarterly presentation',
     icon: 'FileText',
+    color: 'bg-pink-300',
     dueDate: {
       date: new Date(),
       startTime: setMinutes(setHours(new Date(), 13), 0),
@@ -42,6 +44,7 @@ export const LAST_TASKS: ITask[] = [
     id: '3',
     title: 'Client onboarding meeting',
     icon: 'Briefcase',
+    color: 'bg-yellow-300',
     dueDate: {
       date: new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000),
     },
@@ -61,6 +64,7 @@ export const LAST_TASKS: ITask[] = [
     id: '4',
     title: 'Update database schema',
     icon: 'Database',
+    color: 'bg-violet-300',
     dueDate: {
       date: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000),
       startTime: setMinutes(setHours(new Date(), 13), 0),
@@ -79,6 +83,7 @@ export const LAST_TASKS: ITask[] = [
     id: '5',
     title: 'Team building event',
     icon: 'Users',
+    color: 'bg-violet-300',
     dueDate: {
       date: new Date(new Date().getTime() + 4 * 24 * 60 * 60 * 1000),
       startTime: setMinutes(setHours(new Date(), 13), 0),
@@ -97,6 +102,7 @@ export const LAST_TASKS: ITask[] = [
     id: '6',
     title: 'Security audit',
     icon: 'Shield',
+    color: 'bg-violet-300',
     dueDate: {
       date: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000),
       startTime: setMinutes(setHours(new Date(), 13), 0),
@@ -115,6 +121,7 @@ export const LAST_TASKS: ITask[] = [
     id: '7',
     title: 'Infrastructure maintenance',
     icon: 'Settings',
+    color: 'bg-violet-300',
     dueDate: {
       date: new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000),
       startTime: setMinutes(setHours(new Date(), 13), 0),
@@ -133,6 +140,7 @@ export const LAST_TASKS: ITask[] = [
     id: '8',
     title: 'Marketing campaign analysis',
     icon: 'BarChart',
+    color: 'bg-violet-300',
     dueDate: {
       date: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
       startTime: setMinutes(setHours(new Date(), 13), 0),
@@ -151,6 +159,7 @@ export const LAST_TASKS: ITask[] = [
     id: '9',
     title: 'Product roadmap planning',
     icon: 'Layers',
+    color: 'bg-violet-300',
     dueDate: {
       date: new Date(new Date().getTime() + 3 * 24 * 60 * 60 * 1000),
       startTime: setMinutes(setHours(new Date(), 13), 0),
@@ -169,6 +178,7 @@ export const LAST_TASKS: ITask[] = [
     id: '10',
     title: 'Time tracking implementation',
     icon: 'Clock',
+    color: 'bg-violet-300',
     dueDate: {
       date: new Date(new Date().getTime() + 8 * 24 * 60 * 60 * 1000),
     },

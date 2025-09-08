@@ -58,7 +58,7 @@ export const TaskTimeline: FC = observer(() => {
                 className='absolute top-8'
                 style={{ left: `${startPercent}%`, width: `${widthPercent}%` }}
               >
-                <Task task={task} />
+                <Task task={task} isColor isMinimal />
               </div>
             )
           })}
