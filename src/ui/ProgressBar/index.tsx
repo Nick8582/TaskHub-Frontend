@@ -34,7 +34,7 @@ export const ProgressBar: FC<ProgressBarProps> = ({ progress }) => {
     <div className='relative h-12 w-full overflow-hidden rounded-full bg-primary/15'>
       <div
         className={cn(
-          'flex h-full items-center justify-center rounded-full bg-[length:56px_56px] font-medium text-white',
+          'flex h-full items-center justify-center rounded-full bg-[length:56px_56px] font-medium text-white transition-all duration-700 ease-in-out',
           colorProgressBar,
           { 'animate-stripes': clamped < 100 }
         )}

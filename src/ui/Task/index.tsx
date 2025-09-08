@@ -2,14 +2,10 @@ import type { FC } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import {
-  Edit2,
-  Image as LucideImage,
-  Link as LucideLink,
-  MessageSquareMore,
-  Plus,
-} from 'lucide-react'
+import { Edit2, Image as LucideImage, Link as LucideLink, MessageSquareMore } from 'lucide-react'
+import { observer } from 'mobx-react-lite'
 
+import { CreateSubTaskModal } from '@/components/modals/task/create-sub-task'
 import { Pages } from '@/shared/constants/page.constants'
 import type { ITask } from '@/types/task.types'
 import { ProgressBar } from '@/ui/ProgressBar'
@@ -19,7 +15,7 @@ interface TaskProps {
   task: ITask
 }
 
-export const Task: FC<TaskProps> = ({ task }) => {
+export const Task: FC<TaskProps> = observer(({ task }) => {
   const completedCount = task.subTasks.filter(t => t.isCompleted).length
   const totalCount = task.subTasks.length
   const progress = Math.round((completedCount / totalCount) * 100)
@@ -83,9 +79,7 @@ export const Task: FC<TaskProps> = ({ task }) => {
           </span>
         </div>
         <div className='flex items-center gap-2'>
-          <button className='rounded-full bg-primary p-2 text-white transition-colors hover:bg-primary/90'>
-            <Plus size={18} />
-          </button>
+          <CreateSubTaskModal taskId={task.id} />
           <Link
             href={Pages.TASK_EDIT(task.id)}
             className='rounded-full border border-primary bg-white p-2 text-primary transition-colors hover:bg-primary/10'
@@ -96,4 +90,4 @@ export const Task: FC<TaskProps> = ({ task }) => {
       </div>
     </div>
   )
-}
+})

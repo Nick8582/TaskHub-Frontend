@@ -21,3 +21,4 @@ export type TTaskStatus = 'not-started' | 'in-progress' | 'completed'
 export type TTaskSortBy = 'asc' | 'desc'
 
 export type TTaskFormData = Pick<ITask, 'icon' | 'title' | 'dueDate'>
+export type TSubTaskFormData = Pick<ISubTask, 'title'>

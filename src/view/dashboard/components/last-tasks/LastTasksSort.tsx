@@ -1,5 +1,7 @@
 import type { FC } from 'react'
 
+import { observer } from 'mobx-react-lite'
+
 import {
   Select,
   SelectContent,
@@ -7,19 +9,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { taskStore } from '@/stores/task.store'
 import type { TTaskSortBy } from '@/types/task.types'
-
-interface LastTasksSortProps {
-  sortByDueDate: TTaskSortBy
-  setSortByDueDate: (value: TTaskSortBy) => void
-}
 
 const sortTypes: Array<TTaskSortBy> = ['asc', 'desc']
 
-export const LastTasksSort: FC<LastTasksSortProps> = ({ sortByDueDate, setSortByDueDate }) => {
+export const LastTasksSort: FC = observer(() => {
+  const sortByDueDate = taskStore.sortByDueDate
+
   return (
     <div>
-      <Select defaultValue={sortByDueDate} onValueChange={setSortByDueDate}>
+      <Select
+        defaultValue={sortByDueDate}
+        onValueChange={(value: TTaskSortBy) => taskStore.setSortByDueDate(value)}
+      >
         <SelectTrigger className='w-[180px]'>
           <SelectValue placeholder='Sort by due date' />
         </SelectTrigger>
@@ -33,4 +36,4 @@ export const LastTasksSort: FC<LastTasksSortProps> = ({ sortByDueDate, setSortBy
       </Select>
     </div>
   )
-}
+})

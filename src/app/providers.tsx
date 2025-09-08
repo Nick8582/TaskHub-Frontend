@@ -14,7 +14,7 @@ export function Providers({ children }: PropsWithChildren) {
   return (
     <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
       {children}
-      <Toaster position='bottom-right' duration={2500} theme='system' />
+      <Toaster position='bottom-right' duration={2500} />
       <DynamicThemeToggle />
     </ThemeProvider>
   )

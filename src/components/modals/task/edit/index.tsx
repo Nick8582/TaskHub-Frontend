@@ -7,7 +7,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as Popover from '@radix-ui/react-popover'
 import { format } from 'date-fns'
 import { CalendarIcon, X } from 'lucide-react'
+import { observer } from 'mobx-react-lite'
 import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -20,16 +22,16 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { taskStore } from '@/stores/task.store'
 import type { TTaskFormData } from '@/types/task.types'
 import { ICON_MAP, ICON_NAMES } from '@/utils/icon-map'
-import { LAST_TASKS } from '@/view/dashboard/data/last-tasks.data'
 import { TaskSchema } from '@/zod-sсhems/task.zod'
 
 interface TaskEditModalClientProps {
   id: string
 }
 
-export const TaskEditModalClient: FC<TaskEditModalClientProps> = ({ id }) => {
+export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id }) => {
   const router = useRouter()
 
   const closeModal = () => {
@@ -57,13 +59,16 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = ({ id }) => {
   })
 
   useEffect(() => {
-    const task = LAST_TASKS.find(task => task.id === id)
-    if (task) {
-      form.reset(task)
-    }
+    const task = taskStore.getTaskById(id)
+    if (!task) return
+    form.reset({ title: task.title, dueDate: new Date(task.dueDate), icon: task.icon })
   }, [id, form])
 
-  const onSubmit = (data: TTaskFormData) => {}
+  const onSubmit = (data: TTaskFormData) => {
+    taskStore.updateTask(id, data)
+    toast.success('Task update successfully')
+    closeModal()
+  }
 
   return (
     <div
@@ -167,4 +172,4 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = ({ id }) => {
       </div>
     </div>
   )
-}
+})
