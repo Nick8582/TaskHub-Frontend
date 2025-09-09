@@ -49,7 +49,7 @@ export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
       className={cn(
         'flex flex-col rounded-xl bg-card p-3.5',
         isColor && task.color,
-        isColor && 'text-white'
+        isColor && 'text-foreground'
       )}
     >
       <div
@@ -62,7 +62,7 @@ export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
           <div
             className={cn(
               'flex items-center justify-center rounded-full bg-primary/10 p-1.5 text-primary',
-              isColor && 'bg-white text-primary'
+              isColor && 'bg-card text-primary'
             )}
           >
             <IconComponent size={18} />
@@ -122,7 +122,7 @@ export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
             <CreateSubTaskModal taskId={task.id} />
             <Link
               href={DashboardPages.TASK_EDIT(task.id)}
-              className='rounded-full border border-primary bg-white p-2 text-primary transition-colors hover:bg-primary/10'
+              className='rounded-full border border-primary bg-card p-2 text-primary transition-colors hover:bg-primary/10'
             >
               <Edit2 size={18} />
             </Link>

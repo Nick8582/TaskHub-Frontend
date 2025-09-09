@@ -15,7 +15,7 @@ export interface ITask extends Omit<ISubTask, 'isCompleted'> {
   comments: string[]
   resources: string[]
   links: string[]
-  color?: 'bg-violet-300' | 'bg-yellow-300' | 'bg-pink-300'
+  color?: string
 }
 
 export interface ITaskWithTime extends ITask {

@@ -14,7 +14,7 @@ export const ProjectStatCard: FC<ProjectStatCardProps> = ({ projectStat }) => {
   return (
     <div className={clsx(projectStat.bgColor, 'relative overflow-hidden rounded-2xl p-5 shadow')}>
       <div className='relative z-10 flex items-center justify-between'>
-        <div className='flex flex-col text-neutral-800'>
+        <div className='flex flex-col text-foreground'>
           <span className='mb-1 text-4xl font-semibold'>
             {projectStat.id === 3 ? formatMinutes(projectStat.number) : projectStat.number}
           </span>

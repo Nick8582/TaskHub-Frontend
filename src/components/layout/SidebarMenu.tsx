@@ -18,7 +18,7 @@ export const SidebarMenu: FC = () => {
                 <span>{item.label}</span>
               </span>
               {item.label === 'Messages' && (
-                <span className='rounded-lg bg-[#DCDEF6] px-2 text-xs font-medium text-primary'>
+                <span className='rounded-lg bg-[#DCDEF6] px-2 text-xs font-medium text-primary dark:bg-neutral-600'>
                   4
                 </span>
               )}

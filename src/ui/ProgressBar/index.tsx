@@ -25,7 +25,7 @@ export const ProgressBar: FC<ProgressBarProps> = ({ progress }) => {
   const colorProgressBar = useMemo(() => {
     if (clamped >= 100) return 'bg-emerald-500'
     if (clamped >= 75) return 'bg-amber-400'
-    if (clamped >= 50) return 'bg-primary'
+    if (clamped >= 50) return 'bg-primary dark:bg-primary/70'
     if (clamped >= 25) return 'bg-rose-400'
     return 'bg-neutral-300'
   }, [clamped])

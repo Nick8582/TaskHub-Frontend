@@ -10,7 +10,7 @@ export const ProjectStatisticChart: FC = () => {
 
   const chartData = selectedRange.value === 'yearly' ? yearlyData : monthlyData
   return (
-    <div className='h-full w-full rounded-2xl bg-white p-5'>
+    <div className='h-full w-full rounded-2xl bg-card p-5'>
       <ProjectChartHeader selectedRange={selectedRange} onRangeChange={setSelectedRange} />
       <ProjectChart data={chartData} />
     </div>

@@ -38,7 +38,7 @@ export const CreateSubTaskModal: FC<CreateSubTaskModalProps> = observer(({ taskI
 
   return (
     <Dialog open={isOpenModal} onOpenChange={setIsOpenModal}>
-      <DialogTrigger className='rounded-full bg-primary p-2 text-white transition-colors hover:bg-primary/90'>
+      <DialogTrigger className='rounded-full bg-primary p-2 text-white transition-colors hover:bg-primary/90 dark:text-neutral-800'>
         <Plus size={18} />
       </DialogTrigger>
       <DialogContent className='! max-w-sm'>

@@ -27,13 +27,13 @@ export const ProjectChartHeader: FC<ProjectChartHeaderProps> = ({
       <div className='relative'>
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className='flex items-center gap-2 rounded-2xl border border-neutral-200 px-3 py-1.5 text-sm'
+          className='flex items-center gap-2 rounded-2xl border border-neutral-200 px-3 py-1.5 text-sm dark:border-neutral-200/20'
         >
           {selectedRange.label}
           <ChevronDown size={16} />
         </button>
         {isDropdownOpen && (
-          <div className='absolute right-0 z-10 mt-2 w-32 rounded-2xl border border-neutral-200 bg-white py-1'>
+          <div className='absolute right-0 z-10 mt-2 w-32 rounded-2xl border border-neutral-200 bg-card py-1 dark:border-neutral-200/20'>
             {timeRanges.map(item => (
               <button
                 key={item.value}
