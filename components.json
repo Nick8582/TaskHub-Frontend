@@ -18,5 +18,7 @@
     "lib": "@/utils/lib",
     "hooks": "@/hooks"
   },
-  "registries": {}
+  "registries": {
+    "@animate-ui": "https://animate-ui.com/r/{name}.json"
+  }
 }

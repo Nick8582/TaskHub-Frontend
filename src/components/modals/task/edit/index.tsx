@@ -10,6 +10,7 @@ import { CalendarIcon, X } from 'lucide-react'
 import { observer } from 'mobx-react-lite'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import type z from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -25,7 +26,7 @@ import { Input } from '@/components/ui/input'
 import { taskStore } from '@/stores/task.store'
 import type { TTaskFormData } from '@/types/task.types'
 import { ICON_MAP, ICON_NAMES } from '@/utils/icon-map'
-import { TaskSchema } from '@/zod-sсhems/task.zod'
+import { TaskSchema } from '@/zod-sсhemes/task.zod'
 
 interface TaskEditModalClientProps {
   id: string
@@ -49,13 +50,8 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
     return () => document.removeEventListener('keydown', handleEscape)
   }, [])
 
-  const form = useForm<TTaskFormData>({
+  const form = useForm<z.infer<typeof TaskSchema>>({
     resolver: zodResolver(TaskSchema),
-    defaultValues: {
-      title: '',
-      dueDate: undefined,
-      icon: undefined,
-    },
   })
 
   useEffect(() => {
@@ -63,7 +59,7 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
     if (!task) return
     form.reset({
       title: task.title,
-      dueDate: { date: new Date(task.dueDate.date) },
+      dueDate: new Date(task.dueDate.date),
       icon: task.icon,
     })
   }, [id, form])
