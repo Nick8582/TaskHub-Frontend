@@ -1,10 +1,8 @@
 'use client'
 
 import type { FC } from 'react'
-import { useRouter } from 'next/navigation'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { observer } from 'mobx-react-lite'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type z from 'zod'
@@ -20,36 +18,28 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { BubbleBackground } from '@/components/animate-ui/components/backgrounds/bubble'
-import { DashboardPages } from '@/shared/constants/dashboard-pages.constants'
-import { authStore } from '@/stores/auth.store'
+import { signInWithEmail } from '@/app/(auth)/actions'
 import { AuthSchema } from '@/zod-sсhemes/auth.zod'
 
-interface AuthFormProps {
-  type: 'login' | 'register' | 'forgot-password' | 'reset-password'
-}
-
-export const AuthForm: FC<AuthFormProps> = observer(({ type }) => {
-  const isLogin = type === 'login'
-
-  const router = useRouter()
-
+export const AuthForm: FC = () => {
   const form = useForm<z.infer<typeof AuthSchema>>({
     resolver: zodResolver(AuthSchema),
+    defaultValues: {
+      email: '',
+    },
   })
 
   const onSubmit = (data: z.infer<typeof AuthSchema>) => {
-    authStore.login()
-    form.reset()
-    if (authStore.isLoggedIn) {
-      toast.success(isLogin ? 'Logged in successfully' : 'Registered successfully')
-      router.replace(DashboardPages.DASHBOARD)
-    }
+    signInWithEmail({ email: data.email }).then(() => {
+      form.reset()
+      toast.success('Link to sign in has been sent to your email. Please check your inbox.')
+    })
   }
 
   return (
     <BubbleBackground className='absolute inset-0 flex h-full w-full items-center justify-center'>
       <div className='relative z-10 w-full max-w-sm rounded-lg bg-white p-6 shadow-2xl dark:bg-gray-800'>
-        <h1 className='mb-4 text-xl font-bold'>{isLogin ? 'Login' : 'Register'}</h1>
+        <h1 className='mb-4 text-xl font-bold'>Sign in with link</h1>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
@@ -66,26 +56,13 @@ export const AuthForm: FC<AuthFormProps> = observer(({ type }) => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name='password'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder='Enter password' type='password' {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
             <div className='flex justify-end gap-3 pt-4'>
-              <Button type='submit'>{isLogin ? 'Login' : 'Register'}</Button>
+              <Button type='submit'>Send Link</Button>
             </div>
           </form>
         </Form>
       </div>
     </BubbleBackground>
   )
-})
+}
