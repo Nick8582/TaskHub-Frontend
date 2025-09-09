@@ -9,42 +9,42 @@ import {
 } from 'lucide-react'
 
 import type { IMenuItem } from '@/components/layout/menu/menu.types'
-import { Pages } from '@/shared/constants/page.constants'
+import { DashboardPages } from '@/shared/constants/dashboard-pages.constants'
 
 export const MAIN_MENU: IMenuItem[] = [
   {
     icon: LayoutGrid,
     label: 'Dashboard',
-    href: Pages.DASHBOARD,
+    href: DashboardPages.DASHBOARD,
   },
   {
     icon: MessageCircleMore,
     label: 'Messages',
-    href: Pages.MESSAGES,
+    href: DashboardPages.MESSAGES,
   },
   {
     icon: ChartNoAxesColumn,
     label: 'Insight',
-    href: Pages.INSIGHT,
+    href: DashboardPages.INSIGHT,
   },
   {
     icon: UserRound,
     label: 'Team',
-    href: Pages.TEAM,
+    href: DashboardPages.TEAM,
   },
   {
     icon: CalendarDays,
     label: 'Schedule',
-    href: Pages.SCHEDULE,
+    href: DashboardPages.SCHEDULE,
   },
   {
     icon: NotebookText,
     label: 'Report',
-    href: Pages.REPORT,
+    href: DashboardPages.REPORT,
   },
   {
     icon: Settings,
     label: 'Settings',
-    href: Pages.SETTINGS,
+    href: DashboardPages.SETTINGS,
   },
 ]

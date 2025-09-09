@@ -7,7 +7,7 @@ import { Edit2, Image as LucideImage, Link as LucideLink, MessageSquareMore } fr
 import { observer } from 'mobx-react-lite'
 
 import { CreateSubTaskModal } from '@/components/modals/task/create-sub-task'
-import { Pages } from '@/shared/constants/page.constants'
+import { DashboardPages } from '@/shared/constants/dashboard-pages.constants'
 import type { ITask } from '@/types/task.types'
 import { ProgressBar } from '@/ui/ProgressBar'
 import { cn } from '@/utils'
@@ -121,7 +121,7 @@ export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
           <div className='flex items-center gap-2'>
             <CreateSubTaskModal taskId={task.id} />
             <Link
-              href={Pages.TASK_EDIT(task.id)}
+              href={DashboardPages.TASK_EDIT(task.id)}
               className='rounded-full border border-primary bg-white p-2 text-primary transition-colors hover:bg-primary/10'
             >
               <Edit2 size={18} />

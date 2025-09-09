@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Pages } from '@/shared/constants/page.constants'
+import { DashboardPages } from '@/shared/constants/dashboard-pages.constants'
 
 interface TaskEditPageProps {
   params: Promise<{ id: string }>
@@ -12,7 +12,7 @@ export default async function TaskEditPage({ params }: TaskEditPageProps) {
   return (
     <div className='p-6'>
       <div>
-        <Link href={Pages.DASHBOARD}>Back to Dashboard</Link>
+        <Link href={DashboardPages.DASHBOARD}>Back to Dashboard</Link>
       </div>
     </div>
   )

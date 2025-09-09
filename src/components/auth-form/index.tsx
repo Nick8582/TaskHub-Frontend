@@ -4,6 +4,7 @@ import type { FC } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { observer } from 'mobx-react-lite'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import type z from 'zod'
@@ -19,14 +20,15 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { BubbleBackground } from '@/components/animate-ui/components/backgrounds/bubble'
-import { Pages } from '@/shared/constants/page.constants'
+import { DashboardPages } from '@/shared/constants/dashboard-pages.constants'
+import { authStore } from '@/stores/auth.store'
 import { AuthSchema } from '@/zod-sсhemes/auth.zod'
 
 interface AuthFormProps {
   type: 'login' | 'register' | 'forgot-password' | 'reset-password'
 }
 
-export const AuthForm: FC<AuthFormProps> = ({ type }) => {
+export const AuthForm: FC<AuthFormProps> = observer(({ type }) => {
   const isLogin = type === 'login'
 
   const router = useRouter()
@@ -36,9 +38,12 @@ export const AuthForm: FC<AuthFormProps> = ({ type }) => {
   })
 
   const onSubmit = (data: z.infer<typeof AuthSchema>) => {
-    toast.success(isLogin ? 'Logged in successfully' : 'Registered successfully')
+    authStore.login()
     form.reset()
-    router.replace(Pages.DASHBOARD)
+    if (authStore.isLoggedIn) {
+      toast.success(isLogin ? 'Logged in successfully' : 'Registered successfully')
+      router.replace(DashboardPages.DASHBOARD)
+    }
   }
 
   return (
@@ -83,4 +88,4 @@ export const AuthForm: FC<AuthFormProps> = ({ type }) => {
       </div>
     </BubbleBackground>
   )
-}
+})
