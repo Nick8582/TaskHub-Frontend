@@ -7,6 +7,7 @@ import type { TTask } from '@/types/task.types'
 import { Heading } from '@/ui/Heading'
 import { SearchField } from '@/ui/SearchField'
 import { ProjectStatisticChart } from '@/view/dashboard/components/chart/ProjectStatisticChart'
+import { Chat } from '@/view/dashboard/components/chat'
 import { LastTasks } from '@/view/dashboard/components/last-tasks/LastTasks'
 import { ProjectStats } from '@/view/dashboard/components/stat/ProjectStats'
 import { TaskTimeline } from '@/view/dashboard/components/task-timeline/TaskTimeline'
@@ -20,20 +21,20 @@ export const DashboardPage: FC<DashboardPageProps> = ({ tasks }) => {
     taskStore.loadStoreFromServer(tasks)
   }, [])
   return (
-    <div className='grid grid-cols-[2.7fr_1fr] gap-6'>
-      <div>
+    <div className='grid h-screen grid-cols-[3.5fr_1fr] gap-1'>
+      <div className='overflow-y-auto p-5'>
         <div className='mb-6 flex items-center justify-between'>
           <Heading>Dashboard</Heading>
           <SearchField value='' onChange={() => {}} />
         </div>
-        <div className='mb-6 grid grid-cols-[25%_75%] gap-7'>
+        <div className='mb-6 grid grid-cols-[0.9fr_2fr] gap-6'>
           <ProjectStats />
           <ProjectStatisticChart />
         </div>
         <LastTasks />
         <TaskTimeline />
       </div>
-      <div className='flex h-screen items-center justify-center p-5'>CHAT</div>
+      <Chat />
     </div>
   )
 }

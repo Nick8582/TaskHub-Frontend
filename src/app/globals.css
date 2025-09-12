@@ -154,3 +154,9 @@ button {
     background-image: var(--color-bg-gradient);
   }
 }
+
+@media (max-height: 730px) {
+  .chat-header-image {
+    @apply hidden;
+  }
+}

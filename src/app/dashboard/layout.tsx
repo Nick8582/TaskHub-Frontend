@@ -14,7 +14,7 @@ export default async function DashboardLayout({ children, modals }: DashboardLay
   return (
     <div className='min- grid min-h-screen grid-cols-[250px_1fr]'>
       <Sidebar />
-      <main className='p-5'>{children}</main>
+      <main>{children}</main>
       {modals}
     </div>
   )
