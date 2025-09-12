@@ -1,5 +1,4 @@
 import { useMemo, type FC } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { format, isToday } from 'date-fns'
@@ -8,40 +7,30 @@ import { observer } from 'mobx-react-lite'
 
 import { CreateSubTaskModal } from '@/components/modals/task/create-sub-task'
 import { DashboardPages } from '@/shared/constants/dashboard-pages.constants'
-import type { ITask } from '@/types/task.types'
+import type { TTask } from '@/types/task.types'
 import { ProgressBar } from '@/ui/ProgressBar'
 import { cn } from '@/utils'
 import { ICON_MAP } from '@/utils/icon-map'
 
 interface TaskProps {
-  task: ITask
+  task: TTask
   isColor?: boolean
   isMinimal?: boolean
 }
 
 export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
-  const completedCount = task.subTasks.filter(t => t.isCompleted).length
-  const totalCount = task.subTasks.length
+  const completedCount = task?.sub_task?.filter(t => t.is_completed).length || 0
+  const totalCount = task?.sub_task?.length || 0
   const progress = Math.round((completedCount / totalCount) * 100)
 
-  const IconComponent = ICON_MAP[task.icon]
-
-  const daysUntilDue = Math.ceil((task.dueDate.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
-  const dueText =
-    daysUntilDue === 0
-      ? 'Today'
-      : daysUntilDue === 1
-        ? 'Tomorrow'
-        : daysUntilDue > 1
-          ? `${daysUntilDue} days`
-          : 'Overdue'
+  const IconComponent = ICON_MAP[task.icon as keyof typeof ICON_MAP]
 
   const dueDate = useMemo(
     () =>
-      isToday(task.dueDate.date)
+      isToday(task.due_date)
         ? 'Today'
-        : Math.ceil((task.dueDate.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24)) + ' days',
-    [task.dueDate.date]
+        : Math.ceil((+task.due_date - Date.now()) / (1000 * 60 * 60 * 24)) + ' days',
+    [task.due_date]
   )
 
   return (
@@ -73,7 +62,7 @@ export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
               <span className={cn('text-sm opacity-50', isColor && 'opacity-75')}>
                 {isMinimal ? (
                   <>
-                    {format(task.dueDate.startTime!, 'ha')} - {format(task.dueDate.endTime!, 'ha')}
+                    {format(task.start_time!, 'ha')} - {format(task.end_time!, 'ha')}
                   </>
                 ) : (
                   <>Due: {dueDate}</>
@@ -83,7 +72,7 @@ export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
           </div>
         </div>
         <div className='flex items-center -space-x-3'>
-          {task.users.map(item => (
+          {/* {task.users.map(item => (
             <div key={item.id}>
               <Image
                 src={item.avatarPath || ''}
@@ -93,7 +82,7 @@ export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
                 className='rounded-full border border-white dark:border-neutral-800'
               />
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
 
@@ -107,15 +96,15 @@ export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
           <div className='flex items-center gap-4'>
             <span className='flex items-center gap-1'>
               <MessageSquareMore className={isColor ? 'opacity-80' : 'opacity-40'} size={16} />{' '}
-              {task.comments.length}
+              {/* {task.comments.length} */}3
             </span>
             <span className='flex items-center gap-1'>
               <LucideImage className={isColor ? 'opacity-80' : 'opacity-40'} size={16} />
-              {task.resources.length}
+              {/* {task.resources.length} */}6
             </span>
             <span className='flex items-center gap-1'>
               <LucideLink className={isColor ? 'opacity-80' : 'opacity-40'} size={16} />
-              {task.links.length}
+              {/* {task.links.length} */}2
             </span>
           </div>
           <div className='flex items-center gap-2'>

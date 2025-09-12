@@ -1,6 +1,6 @@
 'use server'
 
-import { createClient } from '@/utils/supabase/client'
+import { createClient } from '@/utils/supabase'
 
 export async function signInWithEmail({ email }: { email: string }) {
   const supabase = await createClient()
@@ -9,6 +9,7 @@ export async function signInWithEmail({ email }: { email: string }) {
     email,
     options: {
       shouldCreateUser: true,
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/confirm`,
     },
   })
 }

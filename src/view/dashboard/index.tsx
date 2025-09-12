@@ -1,7 +1,9 @@
 'use client'
 
-import type { FC } from 'react'
+import { useEffect, type FC } from 'react'
 
+import { taskStore } from '@/stores/task.store'
+import type { TTask } from '@/types/task.types'
 import { Heading } from '@/ui/Heading'
 import { SearchField } from '@/ui/SearchField'
 import { ProjectStatisticChart } from '@/view/dashboard/components/chart/ProjectStatisticChart'
@@ -9,7 +11,14 @@ import { LastTasks } from '@/view/dashboard/components/last-tasks/LastTasks'
 import { ProjectStats } from '@/view/dashboard/components/stat/ProjectStats'
 import { TaskTimeline } from '@/view/dashboard/components/task-timeline/TaskTimeline'
 
-export const DashboardPage: FC = () => {
+interface DashboardPageProps {
+  tasks: TTask[]
+}
+
+export const DashboardPage: FC<DashboardPageProps> = ({ tasks }) => {
+  useEffect(() => {
+    taskStore.loadStoreFromServer(tasks)
+  }, [])
   return (
     <div className='grid grid-cols-[2.7fr_1fr] gap-6'>
       <div>

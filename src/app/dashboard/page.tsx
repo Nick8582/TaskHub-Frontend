@@ -10,9 +10,11 @@ export const metadata: Metadata = {
 }
 
 export default async function DashboardPageRoot() {
-  const { data } = await taskServerGetAll()
+  const tasks = await taskServerGetAll()
 
-  console.log('TASKS', data)
+  if (tasks.error) {
+    return <div className='text-red-500'>Failed to load tasks</div>
+  }
 
-  return <DashboardPage />
+  return <DashboardPage tasks={tasks.data} />
 }
