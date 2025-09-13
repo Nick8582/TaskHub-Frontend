@@ -6,5 +6,5 @@ export type TTask = Database['public']['Tables']['task']['Row'] & { sub_task?: T
 export type TTaskStatus = 'not-started' | 'in-progress' | 'completed'
 export type TTaskSortBy = 'asc' | 'desc'
 
-export type TTaskFormData = Pick<TTask, 'icon' | 'title' | 'due_date'>
-export type TSubTaskFormData = Pick<TSubTask, 'title'>
+export type TTaskFormData = Database['public']['Tables']['task']['Update']
+export type TSubTaskFormData = Database['public']['Tables']['task']['Insert']

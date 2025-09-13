@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Popover from '@radix-ui/react-popover'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { CalendarIcon, X } from 'lucide-react'
 import { observer } from 'mobx-react-lite'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, useForm, type SubmitHandler } from 'react-hook-form'
 import { toast } from 'sonner'
 import type z from 'zod'
 
@@ -23,8 +24,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { taskStore } from '@/stores/task.store'
-import type { TTaskFormData } from '@/types/task.types'
+import { taskClientGetById, taskClientUpdate } from '@/services/tasks/task-client.service'
+import type { Database } from '@/types/db.types'
 import { ICON_MAP, ICON_NAMES } from '@/utils/icon-map'
 import { TaskSchema } from '@/zod-sсhemes/task.zod'
 
@@ -54,20 +55,39 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
     resolver: zodResolver(TaskSchema),
   })
 
-  useEffect(() => {
-    const task = taskStore.getTaskById(id)
-    if (!task) return
-    form.reset({
-      title: task.title,
-      dueDate: new Date(task.dueDate.date),
-      icon: task.icon,
-    })
-  }, [id, form])
+  const { isSuccess, data } = useQuery({
+    queryKey: ['task', id],
+    queryFn: () => taskClientGetById(id),
+    enabled: !!id,
+  })
 
-  const onSubmit = (data: TTaskFormData) => {
-    taskStore.updateTask(id, data)
-    toast.success('Task update successfully')
-    closeModal()
+  useEffect(() => {
+    if (!data || !isSuccess) {
+      toast.error('Task not found!')
+      return
+    }
+    form.reset({
+      title: data.title,
+      due_date: new Date(data.due_date),
+      icon: data.icon as keyof typeof ICON_MAP,
+    })
+  }, [isSuccess])
+
+  const { mutate, isPending } = useMutation({
+    mutationKey: ['task', 'updata', id],
+    mutationFn: (data: Database['public']['Tables']['task']['Update']) =>
+      taskClientUpdate(id, data),
+    onSuccess: () => {
+      toast.success('Task update successfully')
+      closeModal()
+    },
+    onError: () => {
+      toast.error('Failed to update task')
+    },
+  })
+
+  const onSubmit: SubmitHandler<z.infer<typeof TaskSchema>> = data => {
+    mutate({ title: data.title, due_date: data.due_date.toISOString(), icon: data.icon })
   }
 
   return (
@@ -106,7 +126,7 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
 
             <Controller
               control={form.control}
-              name='dueDate'
+              name='due_date'
               render={({ field: { onChange, value } }) => (
                 <FormItem className='flex flex-col'>
                   <FormLabel>Due date</FormLabel>
@@ -119,16 +139,11 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
                           className='w-full justify-start text-left font-normal data-[empty=true]:text-muted-foreground'
                         >
                           <CalendarIcon className='mr-2 h-4 w-4' />
-                          {value ? format(value.date, 'PPP') : <span>Pick a date</span>}
+                          {value ? format(value, 'PPP') : <span>Pick a date</span>}
                         </Button>
                       </Popover.Trigger>
                       <Popover.Content className='z-50 w-auto p-0' align='start'>
-                        <Calendar
-                          mode='single'
-                          selected={value.date}
-                          onSelect={onChange}
-                          initialFocus
-                        />
+                        <Calendar mode='single' selected={value} onSelect={onChange} initialFocus />
                       </Popover.Content>
                     </Popover.Root>
                   </FormControl>
@@ -170,7 +185,9 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
               <Button type='button' variant='outline' onClick={closeModal}>
                 Cancel
               </Button>
-              <Button type='submit'>Save</Button>
+              <Button type='submit' disabled={isPending}>
+                {isPending ? 'Updating...' : 'Save'}
+              </Button>
             </div>
           </form>
         </Form>

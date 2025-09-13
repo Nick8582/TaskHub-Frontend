@@ -3,7 +3,6 @@ import Link from 'next/link'
 
 import { format, isToday } from 'date-fns'
 import { Edit2, Image as LucideImage, Link as LucideLink, MessageSquareMore } from 'lucide-react'
-import { observer } from 'mobx-react-lite'
 
 import { CreateSubTaskModal } from '@/components/modals/task/create-sub-task'
 import { DashboardPages } from '@/shared/constants/dashboard-pages.constants'
@@ -18,19 +17,21 @@ interface TaskProps {
   isMinimal?: boolean
 }
 
-export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
+export const Task: FC<TaskProps> = ({ task, isColor, isMinimal }) => {
   const completedCount = task?.sub_task?.filter(t => t.is_completed).length || 0
   const totalCount = task?.sub_task?.length || 0
   const progress = Math.round((completedCount / totalCount) * 100)
 
   const IconComponent = ICON_MAP[task.icon as keyof typeof ICON_MAP]
 
+  const correctDay = new Date(task.due_date)
+
   const dueDate = useMemo(
     () =>
-      isToday(task.due_date)
+      isToday(correctDay)
         ? 'Today'
-        : Math.ceil((+task.due_date - Date.now()) / (1000 * 60 * 60 * 24)) + ' days',
-    [task.due_date]
+        : Math.ceil((+correctDay - Date.now()) / (1000 * 60 * 60 * 24)) + ' days',
+    [correctDay]
   )
 
   return (
@@ -120,4 +121,4 @@ export const Task: FC<TaskProps> = observer(({ task, isColor, isMinimal }) => {
       )}
     </div>
   )
-})
+}

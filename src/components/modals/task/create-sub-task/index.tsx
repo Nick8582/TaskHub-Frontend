@@ -1,8 +1,8 @@
 import { useState, type FC } from 'react'
 
 import { DialogDescription } from '@radix-ui/react-dialog'
+import { useMutation } from '@tanstack/react-query'
 import { Plus } from 'lucide-react'
-import { observer } from 'mobx-react-lite'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
@@ -14,15 +14,31 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { taskStore } from '@/stores/task.store'
+import { createClientSubTask } from '@/services/tasks/task-client.service'
 
 interface CreateSubTaskModalProps {
   taskId: string
 }
 
-export const CreateSubTaskModal: FC<CreateSubTaskModalProps> = observer(({ taskId }) => {
+export const CreateSubTaskModal: FC<CreateSubTaskModalProps> = ({ taskId }) => {
   const [title, setTitle] = useState('')
   const [isOpenModal, setIsOpenModal] = useState(false)
+
+  const { mutate, isPending } = useMutation({
+    mutationKey: ['addSubTask', taskId],
+    mutationFn: () => createClientSubTask(taskId, { title }),
+    onSuccess: () => {
+      toast.success('Subtask added successfully')
+      setTitle('')
+      setIsOpenModal(false)
+    },
+    onError: error => {
+      toast.error('Failed to add sub task', {
+        id: 'subtask-add-error',
+        description: error as unknown as string,
+      })
+    },
+  })
 
   const handleAdd = () => {
     if (!title.trim()) {
@@ -30,10 +46,7 @@ export const CreateSubTaskModal: FC<CreateSubTaskModalProps> = observer(({ taskI
       return
     }
 
-    taskStore.addSubTask(taskId, { title })
-    toast.success('Subtask added successfully')
-    setTitle('')
-    setIsOpenModal(false)
+    mutate()
   }
 
   return (
@@ -51,10 +64,12 @@ export const CreateSubTaskModal: FC<CreateSubTaskModalProps> = observer(({ taskI
               value={title}
               onChange={e => setTitle(e.target.value)}
             />
-            <Button onClick={handleAdd}>Add Subtask</Button>
+            <Button disabled={isPending} onClick={handleAdd}>
+              {isPending ? 'Adding...' : 'Add Subtask'}
+            </Button>
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>
   )
-})
+}
