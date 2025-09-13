@@ -2,18 +2,25 @@ import type { FC } from 'react'
 import Image from 'next/image'
 
 import { getHours, getMinutes } from 'date-fns'
-import { observer } from 'mobx-react-lite'
 
-import { taskStore } from '@/stores/task.store'
+import type { TTask } from '@/types/task.types'
 import { Task } from '@/ui/Task'
+import { parseTime } from '@/utils/parse-time'
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9)
 
-export const TaskTimeline: FC = observer(() => {
-  const todayTasks = taskStore.todayTasks
+interface TaskTimelineProps {
+  tasks: TTask[]
+}
 
+export const TaskTimeline: FC<TaskTimelineProps> = ({ tasks }) => {
   const users = [
-    ...new Map(todayTasks.flatMap(task => task.users).map(user => [user.id, user])).values(),
+    ...new Map(
+      tasks
+        .flatMap(task => task.task_participants)
+        .filter(u => Boolean(u.profile))
+        .map(user => [user.profile.id, user.profile])
+    ).values(),
   ]
 
   return (
@@ -24,8 +31,8 @@ export const TaskTimeline: FC = observer(() => {
           {users.map(user => (
             <div key={user.id}>
               <Image
-                src={user.avatarPath || ''}
-                alt={user.name}
+                src={user.avatar_path || ''}
+                alt={user.name || ''}
                 width={40}
                 height={40}
                 className='rounded-full border border-white dark:border-neutral-800'
@@ -43,11 +50,18 @@ export const TaskTimeline: FC = observer(() => {
           ))}
         </div>
         <div className='relative h-72'>
-          {todayTasks.map(task => {
-            const start = getHours(task.dueDate.startTime)
-            const end = getHours(task.dueDate.endTime)
-            const startMinutes = getMinutes(task.dueDate.startTime)
-            const endMinutes = getMinutes(task.dueDate.endTime)
+          {tasks.map(task => {
+            if (!task.start_time || !task.end_time) {
+              return null
+            }
+
+            const correctStartTime = parseTime(task.due_date, task.start_time)
+            const correctEndTime = parseTime(task.due_date, task.end_time)
+
+            const start = getHours(correctStartTime)
+            const end = getHours(correctEndTime)
+            const startMinutes = getMinutes(correctStartTime)
+            const endMinutes = getMinutes(correctEndTime)
 
             const startPercent = (((start - 9) * 60 + startMinutes) / ((17 - 9) * 60)) * 100
             const endPercent = (((end - 9) * 60 + endMinutes) / ((17 - 9) * 60)) * 100
@@ -68,4 +82,4 @@ export const TaskTimeline: FC = observer(() => {
       </div>
     </div>
   )
-})
+}

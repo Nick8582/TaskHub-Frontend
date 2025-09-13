@@ -32,10 +32,14 @@ export const AuthForm: FC = () => {
   const onSubmit = (data: z.infer<typeof AuthSchema>) => {
     signInWithEmail({ email: data.email })
       .then(() => {
-        toast.success('Link to sign in has been sent to your email. Please check your inbox.')
+        toast.success('Link to sign in has been sent to your email. Please check your inbox.', {
+          id: 'auth-success',
+        })
       })
       .catch(e => {
-        toast.error(`Filed to send sing-in link. Please try again later. Error: ${e.message}`)
+        toast.error(`Filed to send sing-in link. Please try again later. Error: ${e.message}`, {
+          id: 'auth-error',
+        })
       })
       .finally(() => {
         form.reset()

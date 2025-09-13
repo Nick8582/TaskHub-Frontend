@@ -28,7 +28,7 @@ export const Sidebar: FC = () => {
     <aside className='bg-white p-5 dark:bg-neutral-800'>
       <div className='flex items-center justify-between'>
         <SidebarHeading title='Account' />
-        <Button variant={'ghost'} className='opacity-30 hover:opacity-100' onClick={signOut}>
+        <Button variant={'ghost'} className='!p-0 opacity-30 hover:opacity-100' onClick={signOut}>
           <LogOut />
         </Button>
       </div>

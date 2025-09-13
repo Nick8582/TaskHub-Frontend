@@ -1,4 +1,5 @@
 import { useMemo, type FC } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { format, isToday } from 'date-fns'
@@ -10,6 +11,7 @@ import type { TTask } from '@/types/task.types'
 import { ProgressBar } from '@/ui/ProgressBar'
 import { cn } from '@/utils'
 import { ICON_MAP } from '@/utils/icon-map'
+import { parseTime } from '@/utils/parse-time'
 
 interface TaskProps {
   task: TTask
@@ -61,9 +63,10 @@ export const Task: FC<TaskProps> = ({ task, isColor, isMinimal }) => {
             <div className={'leading-tight font-medium wrap-normal opacity-90'}>{task.title}</div>
             <div>
               <span className={cn('text-sm opacity-50', isColor && 'opacity-75')}>
-                {isMinimal ? (
+                {isMinimal && task.start_time && task.end_time ? (
                   <>
-                    {format(task.start_time!, 'ha')} - {format(task.end_time!, 'ha')}
+                    {format(parseTime(task.due_date, task.start_time), 'ha')} -{' '}
+                    {format(parseTime(task.due_date, task.end_time), 'ha')}
                   </>
                 ) : (
                   <>Due: {dueDate}</>
@@ -73,17 +76,19 @@ export const Task: FC<TaskProps> = ({ task, isColor, isMinimal }) => {
           </div>
         </div>
         <div className='flex items-center -space-x-3'>
-          {/* {task.users.map(item => (
-            <div key={item.id}>
-              <Image
-                src={item.avatarPath || ''}
-                alt={item.name}
-                width={36}
-                height={36}
-                className='rounded-full border border-white dark:border-neutral-800'
-              />
-            </div>
-          ))} */}
+          {task.task_participants
+            .filter(u => Boolean(u.profile))
+            .map(({ profile }) => (
+              <div key={profile.id}>
+                <Image
+                  src={profile?.avatar_path || ''}
+                  alt={profile?.name || ''}
+                  width={36}
+                  height={36}
+                  className='rounded-full border border-white dark:border-neutral-800'
+                />
+              </div>
+            ))}
         </div>
       </div>
 

@@ -8,6 +8,7 @@
     "build": "yarn generate:sprite && next build",
     "start": "next start",
     "lint": "next lint",
+    "ts-check": "tsc --noEmit",
     "prettier-check": "prettier -c --config .prettierrc.js --plugin=@ianvs/prettier-plugin-sort-imports --plugin=prettier-plugin-tailwindcss './**/*.{js,jsx,ts,tsx}'",
     "prettier-write": "prettier -c -w --config .prettierrc.js --plugin=@ianvs/prettier-plugin-sort-imports --plugin=prettier-plugin-tailwindcss './**/*.{js,jsx,ts,tsx}'",
     "prepare": "husky"

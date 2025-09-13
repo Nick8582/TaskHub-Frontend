@@ -3,7 +3,7 @@
 import { useEffect, type FC } from 'react'
 
 import { taskStore } from '@/stores/task.store'
-import type { TTask } from '@/types/task.types'
+import type { TGetTasksResponse, TGetTodayTasksResponse } from '@/types/task.types'
 import { Heading } from '@/ui/Heading'
 import { SearchField } from '@/ui/SearchField'
 import { ProjectStatisticChart } from '@/view/dashboard/components/chart/ProjectStatisticChart'
@@ -13,10 +13,11 @@ import { ProjectStats } from '@/view/dashboard/components/stat/ProjectStats'
 import { TaskTimeline } from '@/view/dashboard/components/task-timeline/TaskTimeline'
 
 interface DashboardPageProps {
-  tasks: TTask[]
+  tasks: TGetTasksResponse
+  tasksToday: TGetTodayTasksResponse
 }
 
-export const DashboardPage: FC<DashboardPageProps> = ({ tasks }) => {
+export const DashboardPage: FC<DashboardPageProps> = ({ tasks, tasksToday }) => {
   useEffect(() => {
     taskStore.loadStoreFromServer(tasks)
   }, [])
@@ -32,7 +33,7 @@ export const DashboardPage: FC<DashboardPageProps> = ({ tasks }) => {
           <ProjectStatisticChart />
         </div>
         <LastTasks />
-        <TaskTimeline />
+        <TaskTimeline tasks={tasksToday} />
       </div>
       <Chat />
     </div>
