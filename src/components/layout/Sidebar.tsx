@@ -10,10 +10,15 @@ import { SidebarHeading } from '@/components/layout/SidebarHeading'
 import { SidebarMenu } from '@/components/layout/SidebarMenu'
 import { SidebarProfile } from '@/components/layout/SidebarProfile'
 import { SidebarProjects } from '@/components/layout/SidebarProjects'
+import type { getServerProfile } from '@/services/profile/profile-client.service'
 import { PublicPages } from '@/shared/constants/public-pages.constants'
 import { createClient } from '@/utils/supabase/client'
 
-export const Sidebar: FC = () => {
+interface SidebarProps {
+  data: Awaited<ReturnType<typeof getServerProfile>>
+}
+
+export const Sidebar: FC<SidebarProps> = ({ data }) => {
   const router = useRouter()
 
   async function signOut() {
@@ -25,14 +30,14 @@ export const Sidebar: FC = () => {
   }
 
   return (
-    <aside className='bg-white p-5 dark:bg-neutral-800'>
+    <aside className='bg-white p-4 dark:bg-neutral-800'>
       <div className='flex items-center justify-between'>
         <SidebarHeading title='Account' />
         <Button variant={'ghost'} className='!p-0 opacity-30 hover:opacity-100' onClick={signOut}>
           <LogOut />
         </Button>
       </div>
-      <SidebarProfile />
+      <SidebarProfile data={data} />
 
       <SidebarHeading title='Main Menu' />
       <SidebarMenu />

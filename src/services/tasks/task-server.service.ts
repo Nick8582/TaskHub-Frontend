@@ -4,7 +4,10 @@ import { createClientFromServer } from '@/utils/supabase/server'
 
 export async function getServerTasks() {
   const client = await createClientFromServer()
-  return client.from('task').select('*, sub_task(*), task_participants(profile(*))')
+  return client
+    .from('task')
+    .select('*, sub_task(*), task_participants(profile(*))')
+    .order('due_date', { ascending: true })
 }
 
 export async function getServerTodayTasks() {

@@ -1,8 +1,7 @@
 'use client'
 
-import { useEffect, type FC } from 'react'
+import { type FC } from 'react'
 
-import { taskStore } from '@/stores/task.store'
 import type { TGetTasksResponse, TGetTodayTasksResponse } from '@/types/task.types'
 import { Heading } from '@/ui/Heading'
 import { SearchField } from '@/ui/SearchField'
@@ -18,9 +17,6 @@ interface DashboardPageProps {
 }
 
 export const DashboardPage: FC<DashboardPageProps> = ({ tasks, tasksToday }) => {
-  useEffect(() => {
-    taskStore.loadStoreFromServer(tasks)
-  }, [])
   return (
     <div className='grid h-screen grid-cols-[3.5fr_1fr] gap-1'>
       <div className='overflow-y-auto p-5'>
@@ -32,7 +28,7 @@ export const DashboardPage: FC<DashboardPageProps> = ({ tasks, tasksToday }) => 
           <ProjectStats />
           <ProjectStatisticChart />
         </div>
-        <LastTasks />
+        <LastTasks tasks={tasks} />
         <TaskTimeline tasks={tasksToday} />
       </div>
       <Chat />
