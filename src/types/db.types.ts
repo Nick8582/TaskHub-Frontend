@@ -55,6 +55,51 @@ export type Database = {
         }
         Relationships: []
       }
+      project_chart_point: {
+        Row: {
+          id: string
+          period: string
+          range_type: string
+          value: number
+        }
+        Insert: {
+          id?: string
+          period: string
+          range_type: string
+          value: number
+        }
+        Update: {
+          id?: string
+          period?: string
+          range_type?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      project_stat: {
+        Row: {
+          bg_color: string | null
+          icon: string | null
+          id: string
+          label: string
+          number: number
+        }
+        Insert: {
+          bg_color?: string | null
+          icon?: string | null
+          id?: string
+          label: string
+          number: number
+        }
+        Update: {
+          bg_color?: string | null
+          icon?: string | null
+          id?: string
+          label?: string
+          number?: number
+        }
+        Relationships: []
+      }
       sub_task: {
         Row: {
           id: string
@@ -62,7 +107,6 @@ export type Database = {
           task_id: string | null
           title: string
         }
-
         Insert: {
           id?: string
           is_completed?: boolean | null

@@ -2,6 +2,10 @@
 
 import { type FC } from 'react'
 
+import type {
+  TGetProjectChartDataResponse,
+  TGetProjectStatsResponse,
+} from '@/types/statistics.types'
 import type { TGetTasksResponse, TGetTodayTasksResponse } from '@/types/task.types'
 import { Heading } from '@/ui/Heading'
 import { SearchField } from '@/ui/SearchField'
@@ -15,9 +19,17 @@ interface DashboardPageProps {
   tasks: TGetTasksResponse
   tasksToday: TGetTodayTasksResponse
   userId: string
+  projectStats: TGetProjectStatsResponse
+  projectChartData: TGetProjectChartDataResponse
 }
 
-export const DashboardPage: FC<DashboardPageProps> = ({ tasks, tasksToday, userId }) => {
+export const DashboardPage: FC<DashboardPageProps> = ({
+  tasks,
+  tasksToday,
+  userId,
+  projectStats,
+  projectChartData,
+}) => {
   return (
     <div className='grid h-screen grid-cols-[3.5fr_1fr] gap-1'>
       <div className='overflow-y-auto p-5'>
@@ -26,8 +38,8 @@ export const DashboardPage: FC<DashboardPageProps> = ({ tasks, tasksToday, userI
           <SearchField value='' onChange={() => {}} />
         </div>
         <div className='mb-6 grid grid-cols-[0.9fr_2fr] gap-6'>
-          <ProjectStats />
-          <ProjectStatisticChart />
+          <ProjectStats projectStats={projectStats} />
+          <ProjectStatisticChart projectChartData={projectChartData} />
         </div>
         <LastTasks tasks={tasks} />
         <TaskTimeline tasks={tasksToday} />

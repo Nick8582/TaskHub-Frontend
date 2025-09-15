@@ -3,25 +3,26 @@ import Image from 'next/image'
 
 import clsx from 'clsx'
 
-import type { IProjectStat } from '@/types/project-stats.types'
+import type { TGetProjectStatsResponse } from '@/types/statistics.types'
 import { formatMinutes } from '@/utils/format-minutes'
 
 interface ProjectStatCardProps {
-  projectStat: IProjectStat
+  projectStat: TGetProjectStatsResponse[0]
+  isLast: boolean
 }
 
-export const ProjectStatCard: FC<ProjectStatCardProps> = ({ projectStat }) => {
+export const ProjectStatCard: FC<ProjectStatCardProps> = ({ projectStat, isLast }) => {
   return (
-    <div className={clsx(projectStat.bgColor, 'relative overflow-hidden rounded-2xl p-5 shadow')}>
+    <div className={clsx(projectStat.bg_color, 'relative overflow-hidden rounded-2xl p-5 shadow')}>
       <div className='relative z-10 flex items-center justify-between'>
         <div className='flex flex-col text-foreground'>
           <span className='mb-1 text-4xl font-semibold'>
-            {projectStat.id === 3 ? formatMinutes(projectStat.number) : projectStat.number}
+            {isLast ? formatMinutes(projectStat.number) : projectStat.number}
           </span>
           <span className='text-sm'>{projectStat.label}</span>
         </div>
         <div className='ml-4 flex-shrink-0'>
-          <Image src={projectStat.icon} alt={projectStat.label} width={80} height={80} />
+          <Image src={projectStat.icon || ''} alt={projectStat.label} width={80} height={80} />
         </div>
       </div>
     </div>

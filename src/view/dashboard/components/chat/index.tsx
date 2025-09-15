@@ -3,7 +3,6 @@ import Image from 'next/image'
 
 import { Paperclip, Send } from 'lucide-react'
 
-import { USERS } from '@/mock/users.data'
 import type { TChatMessageWithProfile } from '@/types/chat.types'
 import { createClient } from '@/utils/supabase/client'
 import { ChatMessage } from '@/view/dashboard/components/chat/chat-message'
@@ -76,13 +75,13 @@ export const Chat: FC<ChatProps> = ({ userId }) => {
         <div className='flex items-center gap-2 bg-[#453C9C] p-3.5'>
           <Image
             alt='chat owner'
-            src={USERS[2].avatarPath || ''}
+            src={messages[0].profile?.avatar_path || ''}
             className='mr-2 h-10 w-10 rounded-full'
             width={40}
             height={40}
           />
           <div className='leading-snug text-white'>
-            <div className='font-medium'>{USERS[2].name}</div>
+            <div className='font-medium'>{messages[0].profile?.name}</div>
             <div className='text-sm font-medium opacity-70'>Project Manager</div>
           </div>
         </div>

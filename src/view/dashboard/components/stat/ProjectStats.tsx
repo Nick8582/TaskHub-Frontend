@@ -1,13 +1,21 @@
 import type { FC } from 'react'
 
+import type { TGetProjectStatsResponse } from '@/types/statistics.types'
 import { ProjectStatCard } from '@/view/dashboard/components/stat/ProjectStatCard'
-import { PROJECT_STATS_DATA } from '@/view/dashboard/data/project-stats.data'
 
-export const ProjectStats: FC = () => {
+interface ProjectStatsProps {
+  projectStats: TGetProjectStatsResponse
+}
+
+export const ProjectStats: FC<ProjectStatsProps> = ({ projectStats }) => {
   return (
     <div className='space-y-4'>
-      {PROJECT_STATS_DATA.map(projectStats => (
-        <ProjectStatCard key={projectStats.id} projectStat={projectStats} />
+      {projectStats.map((projectStat, index) => (
+        <ProjectStatCard
+          key={projectStat.id}
+          projectStat={projectStat}
+          isLast={index === projectStats.length - 1}
+        />
       ))}
     </div>
   )
