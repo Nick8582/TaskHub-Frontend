@@ -14,9 +14,10 @@ import { TaskTimeline } from '@/view/dashboard/components/task-timeline/TaskTime
 interface DashboardPageProps {
   tasks: TGetTasksResponse
   tasksToday: TGetTodayTasksResponse
+  userId: string
 }
 
-export const DashboardPage: FC<DashboardPageProps> = ({ tasks, tasksToday }) => {
+export const DashboardPage: FC<DashboardPageProps> = ({ tasks, tasksToday, userId }) => {
   return (
     <div className='grid h-screen grid-cols-[3.5fr_1fr] gap-1'>
       <div className='overflow-y-auto p-5'>
@@ -31,7 +32,7 @@ export const DashboardPage: FC<DashboardPageProps> = ({ tasks, tasksToday }) => 
         <LastTasks tasks={tasks} />
         <TaskTimeline tasks={tasksToday} />
       </div>
-      <Chat />
+      <Chat userId={userId} />
     </div>
   )
 }

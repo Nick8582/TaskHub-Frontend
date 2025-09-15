@@ -10,7 +10,7 @@ import { SidebarHeading } from '@/components/layout/SidebarHeading'
 import { SidebarMenu } from '@/components/layout/SidebarMenu'
 import { SidebarProfile } from '@/components/layout/SidebarProfile'
 import { SidebarProjects } from '@/components/layout/SidebarProjects'
-import type { getServerProfile } from '@/services/profile/profile-client.service'
+import type { getServerProfile } from '@/services/profile/profile-server.service'
 import { PublicPages } from '@/shared/constants/public-pages.constants'
 import { createClient } from '@/utils/supabase/client'
 

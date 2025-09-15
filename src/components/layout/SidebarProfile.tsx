@@ -3,7 +3,7 @@
 import type { FC } from 'react'
 import Image from 'next/image'
 
-import { getServerProfile } from '@/services/profile/profile-client.service'
+import { getServerProfile } from '@/services/profile/profile-server.service'
 
 interface SidebarProfileProps {
   data: Awaited<ReturnType<typeof getServerProfile>>

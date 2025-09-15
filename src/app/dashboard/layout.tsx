@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 import { Sidebar } from '@/components/layout/Sidebar'
-import { getServerProfile } from '@/services/profile/profile-client.service'
+import { getServerProfile } from '@/services/profile/profile-server.service'
 import { getServerAuth } from '@/utils/supabase/get-server-auth'
 
 interface DashboardLayoutProps {

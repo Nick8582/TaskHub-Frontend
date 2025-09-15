@@ -8,6 +8,35 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_message: {
+        Row: {
+          created_at: string | null
+          id: string
+          text: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          text: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          text?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'chat_message_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'profile'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       profile: {
         Row: {
           avatar_path: string | null
@@ -33,6 +62,7 @@ export type Database = {
           task_id: string | null
           title: string
         }
+
         Insert: {
           id?: string
           is_completed?: boolean | null

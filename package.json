@@ -11,7 +11,8 @@
     "ts-check": "tsc --noEmit",
     "prettier-check": "prettier -c --config .prettierrc.js --plugin=@ianvs/prettier-plugin-sort-imports --plugin=prettier-plugin-tailwindcss './**/*.{js,jsx,ts,tsx}'",
     "prettier-write": "prettier -c -w --config .prettierrc.js --plugin=@ianvs/prettier-plugin-sort-imports --plugin=prettier-plugin-tailwindcss './**/*.{js,jsx,ts,tsx}'",
-    "prepare": "husky"
+    "prepare": "husky",
+    "gen:db-types": "supabase gen types typescript --project-id \"beztbljhbtuutwmhgaig\" --schema public > src/types/db.types.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
