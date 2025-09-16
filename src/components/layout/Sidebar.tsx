@@ -34,7 +34,12 @@ export const Sidebar: FC<SidebarProps> = ({ data }) => {
       <div className='flex items-center justify-between'>
         <SidebarHeading title='Account' />
         <AnimateIcon animateOnHover>
-          <Button variant={'ghost'} className='!p-0 opacity-30 hover:opacity-100' onClick={signOut}>
+          <Button
+            variant={'ghost'}
+            className='!p-0 opacity-30 hover:opacity-100'
+            aria-label='Sign out'
+            onClick={signOut}
+          >
             <LogOut />
           </Button>
         </AnimateIcon>

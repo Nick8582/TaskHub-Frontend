@@ -20,6 +20,7 @@ export const SearchField: FC<SearchFieldProps> = ({
         <Search size={20} className='mr-2 text-neutral-500' />
         <input
           type='search'
+          aria-label={placeholder}
           placeholder={placeholder}
           value={value}
           onChange={e => onChange(e.target.value)}

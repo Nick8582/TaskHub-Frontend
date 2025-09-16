@@ -1,11 +1,13 @@
 import type { FC } from 'react'
 import Image from 'next/image'
 
-import { getHours, getMinutes } from 'date-fns'
-
 import type { TTask } from '@/types/task.types'
-import { Task } from '@/ui/Task'
-import { parseTime } from '@/utils/parse-time'
+import { cn } from '@/utils'
+import {
+  currentHour,
+  currentTimeLinePercent,
+} from '@/view/dashboard/components/task-timeline/current-time-line'
+import TimelineCard from '@/view/dashboard/components/task-timeline/TImelineCard'
 
 const HOURS = Array.from({ length: 9 }, (_, i) => i + 9)
 
@@ -44,39 +46,24 @@ export const TaskTimeline: FC<TaskTimelineProps> = ({ tasks }) => {
       <div className='w-full overflow-x-auto p-3'>
         <div className='grid grid-cols-9'>
           {HOURS.map(hour => (
-            <div key={hour} className='text-left text-sm font-medium opacity-50'>
+            <div
+              key={hour}
+              className={cn(
+                'text-left text-sm font-medium opacity-35',
+                hour === currentHour ? 'text-primary opacity-80' : ''
+              )}
+            >
               {hour > 12 ? `${hour - 12} pm` : `${hour} am`}
             </div>
           ))}
         </div>
         <div className='relative h-72'>
+          <div
+            className='absolute top-2 bottom-0 w-0.5 bg-primary/50'
+            style={{ left: currentTimeLinePercent + '% ' }}
+          />
           {tasks.map(task => {
-            if (!task.start_time || !task.end_time) {
-              return null
-            }
-
-            const correctStartTime = parseTime(task.due_date, task.start_time)
-            const correctEndTime = parseTime(task.due_date, task.end_time)
-
-            const start = getHours(correctStartTime)
-            const end = getHours(correctEndTime)
-            const startMinutes = getMinutes(correctStartTime)
-            const endMinutes = getMinutes(correctEndTime)
-
-            const startPercent = (((start - 9) * 60 + startMinutes) / ((17 - 9) * 60)) * 100
-            const endPercent = (((end - 9) * 60 + endMinutes) / ((17 - 9) * 60)) * 100
-
-            const widthPercent = endPercent - startPercent
-
-            return (
-              <div
-                key={task.id}
-                className='absolute top-8'
-                style={{ left: `${startPercent}%`, width: `${widthPercent}%` }}
-              >
-                <Task task={task} isColor isMinimal />
-              </div>
-            )
+            return <TimelineCard key={task.id} task={task} />
           })}
         </div>
       </div>

@@ -17,13 +17,13 @@ export const SidebarProfile: FC<SidebarProfileProps> = ({ data }) => {
       {data.avatar_path ? (
         <Image
           src={data.avatar_path}
-          alt={data.name || ''}
+          alt={data.name || 'User avatar'}
           className='h-7 w-7 shrink-0 rounded-full'
           width={36}
           height={36}
         />
       ) : (
-        <div className='h-8 w-8 shrink-0 rounded-full bg-primary' />
+        <div className='h-8 w-8 shrink-0 rounded-full bg-primary' aria-hidden={true} />
       )}
 
       <div className='leading-snug'>

@@ -1,68 +1,16 @@
-import { useEffect, useRef, useState, type FC } from 'react'
+import { type FC } from 'react'
 import Image from 'next/image'
 
-import { Paperclip } from 'lucide-react'
-
-import { AnimateIcon } from '@/components/animate-ui/icons/icon'
-import { Send } from '@/components/animate-ui/icons/send'
-import type { TChatMessageWithProfile } from '@/types/chat.types'
-import { createClient } from '@/utils/supabase/client'
-import { ChatMessage } from '@/view/dashboard/components/chat/chat-message'
+import ChatMessage from '@/view/dashboard/components/chat/chat-message'
+import ChatInput from '@/view/dashboard/components/chat/ChatInput'
+import { useChat } from '@/view/dashboard/components/chat/useChat'
 
 interface ChatProps {
   userId: string
 }
 
 export const Chat: FC<ChatProps> = ({ userId }) => {
-  const supabase = useRef(createClient())
-
-  const [messages, setMessages] = useState<TChatMessageWithProfile[]>([])
-  const [text, setText] = useState('')
-
-  useEffect(() => {
-    supabase.current
-      .from('chat_message')
-      .select('*, profile:profile (id,  name, avatar_path)')
-      .order('created_at', { ascending: true })
-      .then(({ data }) => {
-        if (!data) return
-
-        setMessages(data)
-      })
-    const channel = supabase.current
-      .channel('chat_messages')
-      .on(
-        'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'chat_message' },
-        async payload => {
-          const { data } = await supabase.current
-            .from('chat_message')
-            .select('*, profile:profile (id, name, avatar_path)')
-            .eq('id', payload.new.id)
-            .single()
-
-          if (data) {
-            setMessages(prev => [...prev, data])
-          }
-        }
-      )
-      .subscribe()
-
-    return () => {
-      supabase.current.removeChannel(channel)
-    }
-  }, [])
-
-  const sendMessage = async () => {
-    if (!text.trim()) return
-
-    await supabase.current.from('chat_message').insert({
-      text,
-      user_id: userId,
-    })
-
-    setText('')
-  }
+  const { messages, sendMessage } = useChat({ userId: userId })
 
   return (
     <div className='flex h-screen flex-col'>
@@ -94,29 +42,7 @@ export const Chat: FC<ChatProps> = ({ userId }) => {
             ))}
           </div>
         </div>
-        <div>
-          <div className='flex items-center gap-2 bg-[#5B51B1] px-3.5 py-3'>
-            <div className='bg-violet-300'></div>
-            <button className='shrink-0 text-white'>
-              <Paperclip />
-            </button>
-            <input
-              type='text'
-              value={text}
-              onChange={e => setText(e.target.value)}
-              className='flex-1 bg-transparent text-white placeholder:text-[#B2AEDF] focus:outline-none'
-              placeholder='Type hare...'
-            />
-            <AnimateIcon animateOnHover>
-              <button
-                onClick={sendMessage}
-                className='transition-color flex size-9 items-center justify-center rounded-full bg-[#9383d8] p-1 text-white opacity-90 hover:opacity-100'
-              >
-                <Send size={18} />
-              </button>
-            </AnimateIcon>
-          </div>
-        </div>
+        <ChatInput sendMessage={sendMessage} />
       </div>
     </div>
   )

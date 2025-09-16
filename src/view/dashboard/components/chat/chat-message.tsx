@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { memo, type FC } from 'react'
 import Image from 'next/image'
 
 import { format } from 'date-fns'
@@ -11,7 +11,7 @@ interface ChatMessageProps {
   userId: string
 }
 
-export const ChatMessage: FC<ChatMessageProps> = ({ message, userId }) => {
+const ChatMessage: FC<ChatMessageProps> = ({ message, userId }) => {
   const isOwnMessage = userId === message.user_id
 
   return (
@@ -67,3 +67,5 @@ export const ChatMessage: FC<ChatMessageProps> = ({ message, userId }) => {
     </div>
   )
 }
+
+export default memo(ChatMessage)

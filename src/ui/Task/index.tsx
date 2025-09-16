@@ -86,7 +86,7 @@ export const Task: FC<TaskProps> = ({ task, isColor, isMinimal }) => {
               <div key={profile.id}>
                 <Image
                   src={profile?.avatar_path || ''}
-                  alt={profile?.name || ''}
+                  alt={profile?.name || 'Task participant avatar'}
                   width={36}
                   height={36}
                   className='rounded-full border border-white dark:border-neutral-800'
@@ -121,6 +121,7 @@ export const Task: FC<TaskProps> = ({ task, isColor, isMinimal }) => {
             <CreateSubTaskModal taskId={task.id} />
             <AnimateIcon animateOnHover>
               <Link
+                aria-label={`Edit task: ${task.title}`}
                 href={DashboardPages.TASK_EDIT(task.id)}
                 className='rounded-full border border-primary bg-card p-2 text-primary transition-colors hover:bg-primary/10'
               >

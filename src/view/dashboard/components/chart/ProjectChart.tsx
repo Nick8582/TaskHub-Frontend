@@ -35,46 +35,48 @@ export const ProjectChart: FC<ProjectChartProps> = ({ data }) => {
   }, [data])
 
   return (
-    <ResponsiveContainer width={'100%'} height={290}>
-      <AreaChart data={data} margin={{ left: -30 }}>
-        <defs>
-          <linearGradient id='colorGradient' x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor='#7c3aed' stopOpacity={0.3} />
-            <stop offset='95%' stopColor='#7c3aed' stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <CartesianGrid strokeDasharray='0' vertical={false} stroke='#9CA3AF' opacity={0.1} />
-        <XAxis
-          dataKey={'period'}
-          axisLine={false}
-          tickLine={false}
-          tick={{ fontSize: '0.8rem', fontWeight: 500, fill: '#9CA3AF' }}
-        />
-        <YAxis
-          axisLine={false}
-          tickLine={false}
-          tick={{ fontSize: '0.8rem', fontWeight: 500, fill: '#9CA3AF' }}
-          domain={[0, 'dataMax + 10']}
-        />
-        <Tooltip content={<ProjectChartTooltip />} cursor={false} />
-        {maxData && (
-          <ReferenceLine
-            x={maxData.period}
-            stroke='#998AC7'
-            strokeDasharray='5 5'
-            strokeWidth={1.5}
-            opacity={0.6}
+    <div role='img' aria-label='Project activity chart'>
+      <ResponsiveContainer width={'100%'} height={290}>
+        <AreaChart data={data} margin={{ left: -30 }}>
+          <defs>
+            <linearGradient id='colorGradient' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='5%' stopColor='#7c3aed' stopOpacity={0.3} />
+              <stop offset='95%' stopColor='#7c3aed' stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid strokeDasharray='0' vertical={false} stroke='#9CA3AF' opacity={0.1} />
+          <XAxis
+            dataKey={'period'}
+            axisLine={false}
+            tickLine={false}
+            tick={{ fontSize: '0.8rem', fontWeight: 500, fill: '#9CA3AF' }}
           />
-        )}
-        <Area
-          type='bump'
-          dataKey='value'
-          stroke='#6366F1'
-          strokeWidth={2}
-          fillOpacity={1}
-          fill='url(#colorGradient)'
-        />
-      </AreaChart>
-    </ResponsiveContainer>
+          <YAxis
+            axisLine={false}
+            tickLine={false}
+            tick={{ fontSize: '0.8rem', fontWeight: 500, fill: '#9CA3AF' }}
+            domain={[0, 'dataMax + 10']}
+          />
+          <Tooltip content={<ProjectChartTooltip />} cursor={false} />
+          {maxData && (
+            <ReferenceLine
+              x={maxData.period}
+              stroke='#998AC7'
+              strokeDasharray='5 5'
+              strokeWidth={1.5}
+              opacity={0.6}
+            />
+          )}
+          <Area
+            type='bump'
+            dataKey='value'
+            stroke='#6366F1'
+            strokeWidth={2}
+            fillOpacity={1}
+            fill='url(#colorGradient)'
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
   )
 }
