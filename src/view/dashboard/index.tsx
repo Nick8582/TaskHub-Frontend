@@ -9,6 +9,7 @@ import type {
 import type { TGetTasksResponse, TGetTodayTasksResponse } from '@/types/task.types'
 import { Heading } from '@/ui/Heading'
 import { SearchField } from '@/ui/SearchField'
+import { cn } from '@/utils'
 import { ProjectStatisticChart } from '@/view/dashboard/components/chart/ProjectStatisticChart'
 import { Chat } from '@/view/dashboard/components/chat'
 import { LastTasks } from '@/view/dashboard/components/last-tasks/LastTasks'
@@ -37,7 +38,12 @@ export const DashboardPage: FC<DashboardPageProps> = ({
           <Heading>Dashboard</Heading>
           <SearchField value='' onChange={() => {}} />
         </div>
-        <div className='mb-6 grid grid-cols-[0.9fr_2fr] gap-6'>
+        <div
+          className={cn(
+            'mb-6 grid gap-6',
+            !projectStats.length && projectChartData ? 'grid-cols-[100%]' : 'grid-cols-[0.9fr_2fr]'
+          )}
+        >
           <ProjectStats projectStats={projectStats} />
           <ProjectStatisticChart projectChartData={projectChartData} />
         </div>

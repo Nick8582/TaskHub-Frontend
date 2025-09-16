@@ -5,10 +5,9 @@ import { useRouter } from 'next/navigation'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Popover from '@radix-ui/react-popover'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { CalendarIcon, X } from 'lucide-react'
-import { observer } from 'mobx-react-lite'
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form'
 import { toast } from 'sonner'
 import type z from 'zod'
@@ -33,7 +32,7 @@ interface TaskEditModalClientProps {
   id: string
 }
 
-export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id }) => {
+export const TaskEditModalClient: FC<TaskEditModalClientProps> = ({ id }) => {
   const router = useRouter()
 
   const closeModal = () => {
@@ -75,8 +74,6 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
       icon: data.icon as keyof typeof ICON_MAP,
     })
   }, [isSuccess])
-
-  const queryClient = useQueryClient()
 
   const { mutate, isPending } = useMutation({
     mutationKey: ['task', 'updata', id],
@@ -199,4 +196,4 @@ export const TaskEditModalClient: FC<TaskEditModalClientProps> = observer(({ id 
       </div>
     </div>
   )
-})
+}

@@ -14,7 +14,7 @@ export default async function DashboardLayout({ children, modals }: DashboardLay
   const data = await getServerProfile()
 
   return (
-    <div className='min- grid min-h-screen grid-cols-[250px_1fr]'>
+    <div className='grid min-h-screen grid-cols-[250px_1fr]'>
       <Sidebar data={data} />
       <main>{children}</main>
       {modals}

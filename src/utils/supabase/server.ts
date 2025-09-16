@@ -19,14 +19,14 @@ export async function createClientFromServer() {
           try {
             cookieStore.set({ name, value, ...options })
           } catch (error) {
-            console.error(error)
+            // Обработка ошибки
           }
         },
         remove(name: string, options: any) {
           try {
             cookieStore.set({ name, value: '', ...options })
           } catch (error) {
-            console.error(error)
+            // Обработка ошибки
           }
         },
       },

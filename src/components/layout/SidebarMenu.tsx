@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import Link from 'next/link'
 
+import { AnimateIcon } from '@/components/animate-ui/icons/icon'
 import { MAIN_MENU } from '@/components/layout/data/main-menu.data'
 
 export const SidebarMenu: FC = () => {
@@ -13,10 +14,12 @@ export const SidebarMenu: FC = () => {
               href={item.href}
               className='flex items-center justify-between pl-2 text-neutral-500 transition-colors hover:text-neutral-900 dark:text-white hover:dark:text-primary'
             >
-              <span className='flex items-center gap-2'>
-                <item.icon size={18} />
-                <span>{item.label}</span>
-              </span>
+              <AnimateIcon animateOnHover>
+                <span className='flex items-center gap-2'>
+                  <item.icon size={18} />
+                  <span>{item.label}</span>
+                </span>
+              </AnimateIcon>
               {item.label === 'Messages' && (
                 <span className='rounded-lg bg-[#DCDEF6] px-2 text-xs font-medium text-primary dark:bg-neutral-600'>
                   4

@@ -3,8 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { format, isToday } from 'date-fns'
-import { Edit2, Image as LucideImage, Link as LucideLink, MessageSquareMore } from 'lucide-react'
+import { Image as LucideImage, Link as LucideLink, MessageSquareMore } from 'lucide-react'
 
+import { Brush } from '@/components/animate-ui/icons/brush'
+import { AnimateIcon } from '@/components/animate-ui/icons/icon'
 import { CreateSubTaskModal } from '@/components/modals/task/create-sub-task'
 import { DashboardPages } from '@/shared/constants/dashboard-pages.constants'
 import type { TTask } from '@/types/task.types'
@@ -26,7 +28,9 @@ export const Task: FC<TaskProps> = ({ task, isColor, isMinimal }) => {
 
   const IconComponent = ICON_MAP[task.icon as keyof typeof ICON_MAP]
 
-  const correctDay = new Date(task.due_date)
+  const correctDay = useMemo(() => {
+    return new Date(task.due_date)
+  }, [task.due_date])
 
   const dueDate = useMemo(
     () =>
@@ -115,12 +119,14 @@ export const Task: FC<TaskProps> = ({ task, isColor, isMinimal }) => {
           </div>
           <div className='flex items-center gap-2'>
             <CreateSubTaskModal taskId={task.id} />
-            <Link
-              href={DashboardPages.TASK_EDIT(task.id)}
-              className='rounded-full border border-primary bg-card p-2 text-primary transition-colors hover:bg-primary/10'
-            >
-              <Edit2 size={18} />
-            </Link>
+            <AnimateIcon animateOnHover>
+              <Link
+                href={DashboardPages.TASK_EDIT(task.id)}
+                className='rounded-full border border-primary bg-card p-2 text-primary transition-colors hover:bg-primary/10'
+              >
+                <Brush size={18} />
+              </Link>
+            </AnimateIcon>
           </div>
         </div>
       )}

@@ -2,7 +2,6 @@ import { useState, type FC } from 'react'
 
 import { DialogDescription } from '@radix-ui/react-dialog'
 import { useMutation } from '@tanstack/react-query'
-import { Plus } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
@@ -14,6 +13,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import { AnimateIcon } from '@/components/animate-ui/icons/icon'
+import { Plus } from '@/components/animate-ui/icons/plus'
 import { createClientSubTask } from '@/services/tasks/task-client.service'
 
 interface CreateSubTaskModalProps {
@@ -51,9 +52,11 @@ export const CreateSubTaskModal: FC<CreateSubTaskModalProps> = ({ taskId }) => {
 
   return (
     <Dialog open={isOpenModal} onOpenChange={setIsOpenModal}>
-      <DialogTrigger className='rounded-full bg-primary p-2 text-white transition-colors hover:bg-primary/90 dark:text-neutral-800'>
-        <Plus size={18} />
-      </DialogTrigger>
+      <AnimateIcon animateOnHover>
+        <DialogTrigger className='rounded-full bg-primary p-2 text-white transition-colors hover:bg-primary/90 dark:text-neutral-800'>
+          <Plus size={18} />
+        </DialogTrigger>
+      </AnimateIcon>
       <DialogContent className='! max-w-sm'>
         <DialogHeader>
           <DialogTitle className='mb-4'>Create a sub task</DialogTitle>

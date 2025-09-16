@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState, type FC } from 'react'
 import Image from 'next/image'
 
-import { Paperclip, Send } from 'lucide-react'
+import { Paperclip } from 'lucide-react'
 
+import { AnimateIcon } from '@/components/animate-ui/icons/icon'
+import { Send } from '@/components/animate-ui/icons/send'
 import type { TChatMessageWithProfile } from '@/types/chat.types'
 import { createClient } from '@/utils/supabase/client'
 import { ChatMessage } from '@/view/dashboard/components/chat/chat-message'
@@ -75,13 +77,13 @@ export const Chat: FC<ChatProps> = ({ userId }) => {
         <div className='flex items-center gap-2 bg-[#453C9C] p-3.5'>
           <Image
             alt='chat owner'
-            src={messages[0].profile?.avatar_path || ''}
+            src={messages[0]?.profile?.avatar_path || ''}
             className='mr-2 h-10 w-10 rounded-full'
             width={40}
             height={40}
           />
           <div className='leading-snug text-white'>
-            <div className='font-medium'>{messages[0].profile?.name}</div>
+            <div className='font-medium'>{messages[0]?.profile?.name}</div>
             <div className='text-sm font-medium opacity-70'>Project Manager</div>
           </div>
         </div>
@@ -94,6 +96,7 @@ export const Chat: FC<ChatProps> = ({ userId }) => {
         </div>
         <div>
           <div className='flex items-center gap-2 bg-[#5B51B1] px-3.5 py-3'>
+            <div className='bg-violet-300'></div>
             <button className='shrink-0 text-white'>
               <Paperclip />
             </button>
@@ -101,15 +104,17 @@ export const Chat: FC<ChatProps> = ({ userId }) => {
               type='text'
               value={text}
               onChange={e => setText(e.target.value)}
-              className='w-full bg-transparent text-white placeholder:text-[#B2AEDF] focus:outline-none'
+              className='flex-1 bg-transparent text-white placeholder:text-[#B2AEDF] focus:outline-none'
               placeholder='Type hare...'
             />
-            <button
-              onClick={sendMessage}
-              className='transition-color flex size-9 items-center justify-center rounded-full bg-[#9383d8] p-1 text-white opacity-90 hover:opacity-100'
-            >
-              <Send size={18} />
-            </button>
+            <AnimateIcon animateOnHover>
+              <button
+                onClick={sendMessage}
+                className='transition-color flex size-9 items-center justify-center rounded-full bg-[#9383d8] p-1 text-white opacity-90 hover:opacity-100'
+              >
+                <Send size={18} />
+              </button>
+            </AnimateIcon>
           </div>
         </div>
       </div>

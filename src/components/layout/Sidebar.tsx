@@ -3,9 +3,9 @@
 import type { FC } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { LogOut } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { AnimateIcon } from '@/components/animate-ui/icons/icon'
+import { LogOut } from '@/components/animate-ui/icons/log-out'
 import { SidebarHeading } from '@/components/layout/SidebarHeading'
 import { SidebarMenu } from '@/components/layout/SidebarMenu'
 import { SidebarProfile } from '@/components/layout/SidebarProfile'
@@ -30,12 +30,14 @@ export const Sidebar: FC<SidebarProps> = ({ data }) => {
   }
 
   return (
-    <aside className='bg-white p-4 dark:bg-neutral-800'>
+    <aside className='h-screen overflow-y-auto bg-white p-4 dark:bg-neutral-800'>
       <div className='flex items-center justify-between'>
         <SidebarHeading title='Account' />
-        <Button variant={'ghost'} className='!p-0 opacity-30 hover:opacity-100' onClick={signOut}>
-          <LogOut />
-        </Button>
+        <AnimateIcon animateOnHover>
+          <Button variant={'ghost'} className='!p-0 opacity-30 hover:opacity-100' onClick={signOut}>
+            <LogOut />
+          </Button>
+        </AnimateIcon>
       </div>
       <SidebarProfile data={data} />
 

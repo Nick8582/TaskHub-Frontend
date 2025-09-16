@@ -1,19 +1,16 @@
-import {
-  CalendarDays,
-  ChartNoAxesColumn,
-  LayoutGrid,
-  MessageCircleMore,
-  NotebookText,
-  Settings,
-  UserRound,
-} from 'lucide-react'
+import { CalendarDays, NotebookText } from 'lucide-react'
 
+import { ChartNoAxesColumn } from '@/components/animate-ui/icons/chart-no-axes-column'
+import { LayoutDashboard } from '@/components/animate-ui/icons/layout-dashboard'
+import { MessageCircleMore } from '@/components/animate-ui/icons/message-circle-more'
+import { Settings } from '@/components/animate-ui/icons/settings'
+import { UsersRound } from '@/components/animate-ui/icons/users-round'
 import type { IMenuItem } from '@/components/layout/menu/menu.types'
 import { DashboardPages } from '@/shared/constants/dashboard-pages.constants'
 
 export const MAIN_MENU: IMenuItem[] = [
   {
-    icon: LayoutGrid,
+    icon: LayoutDashboard,
     label: 'Dashboard',
     href: DashboardPages.DASHBOARD,
   },
@@ -28,7 +25,7 @@ export const MAIN_MENU: IMenuItem[] = [
     href: DashboardPages.INSIGHT,
   },
   {
-    icon: UserRound,
+    icon: UsersRound,
     label: 'Team',
     href: DashboardPages.TEAM,
   },

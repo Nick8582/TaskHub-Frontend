@@ -29,7 +29,7 @@ export const ConfirmSlicePage = () => {
     }
 
     verifyToken()
-  }, [])
+  }, [params, router])
 
   return <p>Verifying your email... Please wait.</p>
 }
