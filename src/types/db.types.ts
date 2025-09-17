@@ -55,6 +55,41 @@ export type Database = {
         }
         Relationships: []
       }
+      project: {
+        Row: {
+          color: string | null
+          create_at: string
+          id: string
+          name: string
+          owner_id: string | null
+          slug: string
+        }
+        Insert: {
+          color?: string | null
+          create_at?: string
+          id?: string
+          name: string
+          owner_id?: string | null
+          slug: string
+        }
+        Update: {
+          color?: string | null
+          create_at?: string
+          id?: string
+          name?: string
+          owner_id?: string | null
+          slug?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'project_owner_id_fkey'
+            columns: ['owner_id']
+            isOneToOne: false
+            referencedRelation: 'profile'
+            referencedColumns: ['id']
+          },
+        ]
+      }
       project_chart_point: {
         Row: {
           id: string
@@ -75,6 +110,36 @@ export type Database = {
           value?: number
         }
         Relationships: []
+      }
+      project_participants: {
+        Row: {
+          profile_id: string
+          project_id: string
+        }
+        Insert: {
+          profile_id: string
+          project_id: string
+        }
+        Update: {
+          profile_id?: string
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'project_participants_profile_id_fkey'
+            columns: ['profile_id']
+            isOneToOne: false
+            referencedRelation: 'profile'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'project_participants_project_id_fkey'
+            columns: ['project_id']
+            isOneToOne: false
+            referencedRelation: 'project'
+            referencedColumns: ['id']
+          },
+        ]
       }
       project_stat: {
         Row: {
@@ -137,6 +202,7 @@ export type Database = {
           icon: string | null
           id: string
           owner_id: string | null
+          project_id: string | null
           start_time: string | null
           title: string
         }
@@ -147,6 +213,7 @@ export type Database = {
           icon?: string | null
           id?: string
           owner_id?: string | null
+          project_id?: string | null
           start_time?: string | null
           title: string
         }
@@ -157,6 +224,7 @@ export type Database = {
           icon?: string | null
           id?: string
           owner_id?: string | null
+          project_id?: string | null
           start_time?: string | null
           title?: string
         }
@@ -166,6 +234,13 @@ export type Database = {
             columns: ['owner_id']
             isOneToOne: false
             referencedRelation: 'profile'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'task_project_id_fkey'
+            columns: ['project_id']
+            isOneToOne: false
+            referencedRelation: 'project'
             referencedColumns: ['id']
           },
         ]
