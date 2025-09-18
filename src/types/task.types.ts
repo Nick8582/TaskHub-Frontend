@@ -1,3 +1,4 @@
+import type { getClientTasks } from '@/services/tasks/task-client.service'
 import type { getServerTasks, getServerTodayTasks } from '@/services/tasks/task-server.service'
 
 import type { Database } from './db.types'
@@ -18,3 +19,5 @@ export type TTaskSortBy = 'asc' | 'desc'
 
 export type TTaskFormData = Database['public']['Tables']['task']['Update']
 export type TSubTaskFormData = Database['public']['Tables']['task']['Insert']
+
+export type TClientTaskResponse = Awaited<ReturnType<typeof getClientTasks>>

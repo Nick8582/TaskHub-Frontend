@@ -5,7 +5,7 @@ import { createClientFromServer } from '@/utils/supabase/server'
 export async function getServerProjects() {
   const client = await createClientFromServer()
 
-  return client.from('project').select('*').order('due_date', { ascending: true })
+  return client.from('project').select('*').order('create_at', { ascending: true })
 }
 
 export async function getServerProjectBySlug(slug: string) {
@@ -13,6 +13,8 @@ export async function getServerProjectBySlug(slug: string) {
 
   return client
     .from('project')
-    .select('*, task(*), project_participants(profile(*))')
+    .select(
+      '*, task(*, sub_task(*), task_participants(*, profile(*))), project_participants(profile(*))'
+    )
     .eq('slug', slug)
 }

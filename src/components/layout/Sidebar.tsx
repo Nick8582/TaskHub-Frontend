@@ -12,13 +12,15 @@ import { SidebarProfile } from '@/components/layout/SidebarProfile'
 import { SidebarProjects } from '@/components/layout/SidebarProjects'
 import type { getServerProfile } from '@/services/profile/profile-server.service'
 import { PublicPages } from '@/shared/constants/public-pages.constants'
+import type { TProjectList } from '@/types/project.types'
 import { createClient } from '@/utils/supabase/client'
 
 interface SidebarProps {
   data: Awaited<ReturnType<typeof getServerProfile>>
+  projects: TProjectList
 }
 
-export const Sidebar: FC<SidebarProps> = ({ data }) => {
+export const Sidebar: FC<SidebarProps> = ({ data, projects }) => {
   const router = useRouter()
 
   async function signOut() {
@@ -50,7 +52,7 @@ export const Sidebar: FC<SidebarProps> = ({ data }) => {
       <SidebarMenu />
 
       <SidebarHeading title='Projects' />
-      <SidebarProjects />
+      <SidebarProjects projects={projects} />
     </aside>
   )
 }

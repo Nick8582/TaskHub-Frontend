@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { getServerProjectBySlug } from '@/services/projects/project-server.service'
 import { NO_INDEX_PAGE } from '@/shared/constants/seo.constants'
+import { ProjectDetails } from '@/view/project-details'
 
 export const metadata: Metadata = {
   title: 'Project details',
@@ -18,5 +19,9 @@ export default async function ProjectDetailsPageRoot(props: Props) {
 
   const project = await getServerProjectBySlug(slug)
 
-  return <div></div>
+  if (!project?.data?.length) {
+    return <div className='p-5'>Project not found</div>
+  }
+
+  return <ProjectDetails project={project.data[0]} />
 }

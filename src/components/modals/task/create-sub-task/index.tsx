@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, type FC } from 'react'
 
 import { DialogDescription } from '@radix-ui/react-dialog'

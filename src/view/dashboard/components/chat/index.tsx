@@ -23,13 +23,15 @@ export const Chat: FC<ChatProps> = ({ userId }) => {
       />
       <div className='flex min-h-0 flex-1 flex-col'>
         <div className='flex items-center gap-2 bg-[#453C9C] p-3.5'>
-          <Image
-            alt='chat owner'
-            src={messages[0]?.profile?.avatar_path || ''}
-            className='mr-2 h-10 w-10 rounded-full'
-            width={40}
-            height={40}
-          />
+          {messages[0]?.profile?.avatar_path && (
+            <Image
+              alt='chat owner'
+              src={messages[0]?.profile?.avatar_path || ''}
+              className='mr-2 h-10 w-10 rounded-full'
+              width={40}
+              height={40}
+            />
+          )}
           <div className='leading-snug text-white'>
             <div className='font-medium'>{messages[0]?.profile?.name}</div>
             <div className='text-sm font-medium opacity-70'>Project Manager</div>

@@ -1,4 +1,7 @@
-import type { getServerProjectBySlug } from '@/services/projects/project-server.service'
+import type {
+  getServerProjectBySlug,
+  getServerProjects,
+} from '@/services/projects/project-server.service'
 
 export interface IProject {
   color: string
@@ -8,3 +11,5 @@ export interface IProject {
 export type TProjectWithSlug = NonNullable<
   Awaited<ReturnType<typeof getServerProjectBySlug>>['data']
 >[0]
+
+export type TProjectList = Awaited<ReturnType<typeof getServerProjects>>['data']
